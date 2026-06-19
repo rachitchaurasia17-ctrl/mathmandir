@@ -290,58 +290,37 @@
     .daily-num { font-family: 'Marcellus',serif; font-size: 14px; color: #cdb896; }
     .daily-divider { border-top: 1px solid rgba(150,116,40,0.2); }
 
+    /* ─── EVENTS ─── */
     #events {
-      position: relative;
-      padding: clamp(72px,11vh,140px) 0;
-      overflow: hidden;
+      position: relative; background: #f4e9d5;
+      padding: clamp(72px,11vh,140px) clamp(22px,5vw,80px);
     }
-    /* video background */
-    .events-video-bg {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; z-index: 0;
-      filter: brightness(0.25) saturate(1.3);
-    }
-    /* warm overlay gradient over video */
-    .events-video-overlay {
-      position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(135deg,
-        rgba(46,36,23,0.78) 0%,
-        rgba(90,50,10,0.55) 50%,
-        rgba(46,36,23,0.78) 100%);
-    }
-    .events-inner {
-      position: relative; z-index: 2;
-      max-width: 1200px; margin: 0 auto;
-      padding: 0 clamp(22px,5vw,80px);
-    }
+    .events-inner { max-width: 1200px; margin: 0 auto; }
     .events-header {
       display: flex; flex-wrap: wrap; justify-content: space-between;
-      align-items: flex-end; gap: 24px; margin-bottom: 56px;
+      align-items: flex-end; gap: 24px; margin-bottom: 48px;
     }
-    .events-header .section-label { color: rgba(255,200,100,0.8); }
-    .events-header .section-h2 { color: #fff7e8; }
     .events-header-link {
       font-family: 'Marcellus',serif; font-size: 13px; letter-spacing: .08em;
-      color: rgba(255,200,100,0.9); text-decoration: none;
-      border-bottom: 1px solid rgba(255,200,100,0.5); padding-bottom: 3px;
-      transition: color .3s, border-color .3s;
+      color: #8a5a22; text-decoration: none;
+      border-bottom: 1px solid var(--accent); padding-bottom: 3px;
+      transition: color .3s;
     }
-    .events-header-link:hover { color: #fff; border-color: #fff; }
-    /* festival cards grid */
+    .events-header-link:hover { color: var(--accent); }
     .events-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
     .event-card {
+      display: block; text-decoration: none; color: inherit;
       position: relative; overflow: hidden;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,220,120,0.2);
-      backdrop-filter: blur(8px);
+      background: #faf4e6;
+      border: 1px solid rgba(150,116,40,0.18);
       border-radius: 12px;
       padding: 34px 28px 38px;
       transition: background .4s, transform .4s, box-shadow .4s;
-      cursor: default;
+      cursor: pointer;
     }
     .event-card::before {
       content: '';
@@ -350,57 +329,45 @@
       transform: scaleX(0); transform-origin: left;
       transition: transform .5s ease;
     }
-    .event-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.35); }
+    .event-card:hover { background: #fffdf8; transform: translateY(-6px); box-shadow: 0 20px 50px rgba(120,80,20,0.15); }
     .event-card:hover::before { transform: scaleX(1); }
     .event-icon {
       font-size: 32px; margin-bottom: 20px; display: block;
-      filter: drop-shadow(0 2px 6px rgba(217,119,46,0.5));
+      filter: drop-shadow(0 2px 6px rgba(217,119,46,0.3));
     }
     .event-card-month {
       margin: 0; font-family: 'Marcellus',serif; font-size: 10.5px;
-      letter-spacing: .22em; text-transform: uppercase;
-      color: rgba(255,200,100,0.8);
+      letter-spacing: .22em; text-transform: uppercase; color: var(--accent);
     }
     .event-card-name {
       margin: 12px 0 0; font-family: 'Marcellus',serif; font-weight: 400;
-      font-size: clamp(20px,2vw,26px); line-height: 1.15; color: #fff7e8;
+      font-size: clamp(20px,2vw,26px); line-height: 1.15; color: #2e2417;
     }
     .event-card-hi {
       margin: 10px 0 0; font-family: 'Tiro Devanagari Hindi',serif;
-      font-size: 15px; color: rgba(255,220,120,0.7);
+      font-size: 15px; color: #a8946f;
     }
     .event-card-desc {
       margin: 14px 0 0; font-size: 14.5px; line-height: 1.75;
-      font-weight: 300; color: rgba(255,247,232,0.78);
+      font-weight: 300; color: #6b5d45;
+    }
+    .event-card-cta {
+      display: inline-block; margin-top: 18px;
+      font-family: 'Marcellus',serif; font-size: 11px; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--accent);
+      border-bottom: 1px solid var(--accent); padding-bottom: 2px;
     }
     /* special highlight card */
     .event-card-special {
-      background: linear-gradient(135deg, rgba(217,119,46,0.85), rgba(183,138,50,0.85));
-      border-color: rgba(255,255,255,0.2);
-      display: flex; flex-direction: column;
+      background: var(--accent); border-color: var(--accent);
     }
-    .event-card-special::before { background: linear-gradient(90deg,#fff,rgba(255,255,255,0.5)); }
+    .event-card-special:hover { background: #c06a22; }
     .event-card-special .event-card-month { color: rgba(255,255,255,0.85); }
-    .event-card-special .event-card-name { color: #fff; font-size: clamp(22px,2.2vw,28px); }
-    .event-card-special .event-card-desc { color: rgba(255,255,255,0.9); }
-    /* pulsing quote below */
-    .events-quote-bar {
-      margin-top: 56px; text-align: center;
-      padding: 40px; border: 1px solid rgba(255,220,120,0.15);
-      border-radius: 8px; background: rgba(255,255,255,0.04);
-      backdrop-filter: blur(6px);
-    }
-    .events-quote-bar blockquote {
-      margin: 0; font-family: 'Spectral',serif; font-style: italic;
-      font-weight: 300; font-size: clamp(17px,1.8vw,22px);
-      line-height: 1.65; color: rgba(255,247,232,0.88);
-    }
-    .events-quote-bar figcaption {
-      margin-top: 16px; font-family: 'Marcellus',serif;
-      font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
-      color: rgba(255,200,100,0.7);
-    }
-    .events-note { margin: 24px 0 0; font-size: 13px; font-weight: 300; font-style: italic; color: rgba(255,247,232,0.5); }
+    .event-card-special .event-card-name { color: #fff; }
+    .event-card-special .event-card-hi { color: rgba(255,255,255,0.7); }
+    .event-card-special .event-card-desc { color: rgba(255,255,255,0.92); }
+    .event-card-special .event-card-cta { color: #fff; border-color: rgba(255,255,255,0.6); }
+    .events-note { margin: 22px 0 0; font-size: 13.5px; font-weight: 300; font-style: italic; color: #8a7c63; }
 
     /* ─── PARAMPARA ─── */
     #parampara {
@@ -763,28 +730,18 @@
 
 <!-- ============ 03 · EVENTS ============ -->
 <section id="events">
-  <!-- video background -->
-  <video class="events-video-bg" autoplay muted loop playsinline preload="none"
-         src="d8562000ae05e3d1ba0e2ea0e23bdaae.mp4"
-         aria-hidden="true"></video>
-  <div class="events-video-overlay"></div>
-
   <div class="events-inner">
     <div class="events-header" data-reveal>
       <div style="max-width:620px">
         <p class="section-label">03 — Sacred Calendar</p>
-        <h2 class="section-h2">Festivals &amp; Observances<br>through the year</h2>
+        <h2 class="section-h2">Festivals &amp; observances<br>through the year</h2>
       </div>
       <a href="https://drive.google.com/file/d/1UXDkEpu5Elma1FzoRUCAYJ8rzeSp6gs_/view"
          target="_blank" rel="noreferrer"
          class="events-header-link" id="panchang-link">View the Panchang →</a>
     </div>
     <div class="events-grid" data-reveal id="events-grid"><!-- populated by JS --></div>
-    <figure class="events-quote-bar" data-reveal>
-      <blockquote>"In this age of Kali, the congregational chanting of the holy name is the only means of deliverance."</blockquote>
-      <figcaption>Sri Chaitanya Mahaprabhu</figcaption>
-    </figure>
-    <p class="events-note" data-reveal>Dates follow the Vaishnava lunar calendar — refer to the Panchang or contact the Math for this year's schedule.</p>
+    <p class="events-note" data-reveal>Dates follow the Vaishnava lunar calendar and vary each year — please refer to the Panchang or contact the Math for the current schedule.</p>
   </div>
 </section>
 
@@ -947,11 +904,11 @@ const DAILY = [
 ];
 
 const EVENTS = [
-  { month:'Phalguna · Feb–Mar', name:'Sri Gaura Purnima',             hi:'श्री गौर पूर्णिमा',        desc:'The appearance of Sri Chaitanya Mahaprabhu — the most sacred celebration of the year.' },
-  { month:'Bhadra · Aug–Sep',   name:'Sri Krishna Janmashtami',       hi:'श्री कृष्ण जन्माष्टमी',    desc:'The midnight appearance of Lord Krishna — fasting, abhishek and night-long kirtan.' },
-  { month:'Bhadra · Sep',       name:'Sri Radhastami',                hi:'श्री राधाष्टमी',            desc:'The appearance of Srimati Radharani, honoured with special offerings and sweet song.' },
-  { month:'Kartik · Oct–Nov',   name:'Damodara Vrata',                hi:'दामोदर व्रत',               desc:'The holy month of Kartik — devotees offer ghee lamps to Lord Damodara each evening.' },
-  { month:'Through the Year',   name:'Appearance & Disappearance Days', hi:'आविर्भाव · तिरोभाव',     desc:'Sacred observances honouring the great Acharyas of the lineage.' },
+  { month:'Phalguna · Feb–Mar', name:'Sri Gaura Purnima',        hi:'श्री गौर पूर्णिमा',     url:'gaura-purnima.html', desc:'The appearance of Sri Chaitanya Mahaprabhu — the most sacred celebration of the year.' },
+  { month:'Bhadra · Aug–Sep',   name:'Sri Krishna Janmashtami',  hi:'श्री कृष्ण जन्माष्टमी', url:'janmashtami.html',   desc:'The midnight appearance of Lord Krishna — fasting, abhishek and night-long kirtan.' },
+  { month:'Bhadra · Sep',       name:'Sri Radhastami',           hi:'श्री राधाष्टमी',         url:'radhastami.html',    desc:'The appearance of Srimati Radharani, honoured with special offerings and sweet song.' },
+  { month:'Kartik · Oct–Nov',   name:'Damodara Vrata',           hi:'दामोदर व्रत',            url:'damodara-vrata.html', desc:'The holy month of Kartik — devotees offer ghee lamps to Lord Damodara each evening.' },
+  { month:'Ashadha · Jun–Jul',  name:'Sri Jagannath Rath Yatra', hi:'श्री जगन्नाथ रथ यात्रा', url:'rath-yatra.html',    desc:'The grand chariot festival of Lord Jagannath — a spectacular procession of love and devotion.' },
 ];
 
 const I = 'https://www.sreecgmath.org/image/';
@@ -1028,16 +985,17 @@ buildTicks(document.getElementById('footer-ticks'));
 
 /* ── Events grid ── */
 (function() {
-  const ICONS = ['🌕','🙏','🪷','🪔','✨'];
+  const ICONS = ['🌕','🙏','🪷','🪔','🛕'];
   const el = document.getElementById('events-grid');
   const cards = EVENTS.map((e, i) => `
-    <div class="event-card">
+    <a href="${e.url}" target="_blank" class="event-card">
       <span class="event-icon">${ICONS[i] || '✨'}</span>
       <p class="event-card-month">${e.month}</p>
       <h3 class="event-card-name">${e.name}</h3>
       <p class="event-card-hi">${e.hi}</p>
       <p class="event-card-desc">${e.desc}</p>
-    </div>
+      <span class="event-card-cta">Read the full story →</span>
+    </a>
   `).join('');
   const special = `
     <div class="event-card event-card-special">

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Marcellus&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:#0b0805; }
+  body{ overflow-x:hidden; }
+  ::selection{ background:rgba(200,162,74,0.3); color:#f3ead9; }
+  [data-reveal]{ opacity:0; transform:translateY(46px); transition:opacity 1.2s cubic-bezier(.2,.7,.2,1), transform 1.3s cubic-bezier(.2,.7,.2,1); }
+  [data-reveal].seen{ opacity:1; transform:none; }
+  @keyframes auraBreathe{ 0%,100%{ transform:scale(1); opacity:.85; } 50%{ transform:scale(1.06); opacity:1; } }
+  @keyframes spinSlow{ to{ transform:rotate(360deg); } }
+  @keyframes spinRev{ to{ transform:rotate(-360deg); } }
+  @keyframes flameFlick{ 0%,100%{ transform:scaleY(1) translateY(0); opacity:.9; } 50%{ transform:scaleY(1.12) translateY(-1px); opacity:1; } }
+  @keyframes shimmerSweep{ 0%{ background-position:-200% 0; } 100%{ background-position:200% 0; } }
+  @keyframes scrollDip{ 0%{ transform:translateY(0); opacity:.2; } 50%{ transform:translateY(9px); opacity:1; } 100%{ transform:translateY(0); opacity:.2; } }
+  @keyframes nodeGlow{ 0%,100%{ box-shadow:0 0 0 0 rgba(200,162,74,0); } 50%{ box-shadow:0 0 28px 2px rgba(200,162,74,.35); } }
+</style>
+</helmet>
+
+<div data-droot style="position:relative; background:#0b0805; color:#ece4d6; font-family:'Cormorant Garamond',Georgia,serif; min-height:100vh; width:100%; overflow:hidden;">
+
+  <!-- ============ THE FIRST DARSHAN ============ -->
+  <div data-l="overlay" style="position:fixed; inset:0; z-index:60; background:transparent; overflow:hidden;">
+    <div data-l="blackbase" style="position:absolute; inset:0; background:#000;"></div>
+    <div data-l="ray" style="position:absolute; left:50%; top:-12%; width:62vw; height:130vh; transform:translateX(-50%); opacity:0; background:radial-gradient(58% 50% at 50% 38%, rgba(232,201,122,0.22), rgba(200,162,74,0.06) 42%, rgba(0,0,0,0) 72%); filter:blur(6px); mix-blend-mode:screen;"></div>
+    <div data-l="ray2" style="position:absolute; left:50%; top:0; width:9vw; height:120vh; transform:translateX(-50%) rotate(4deg); opacity:0; background:linear-gradient(to bottom, rgba(232,201,122,0.16), rgba(200,162,74,0) 80%); filter:blur(10px); mix-blend-mode:screen;"></div>
+
+    <div data-l="pillarL" style="position:absolute; left:0; top:0; width:24vw; height:100vh; opacity:0; background:linear-gradient(90deg, rgba(20,14,8,0.96), rgba(20,14,8,0.4) 60%, rgba(20,14,8,0)); border-right:1px solid rgba(200,162,74,0.05);"></div>
+    <div data-l="pillarR" style="position:absolute; right:0; top:0; width:24vw; height:100vh; opacity:0; background:linear-gradient(270deg, rgba(20,14,8,0.96), rgba(20,14,8,0.4) 60%, rgba(20,14,8,0)); border-left:1px solid rgba(200,162,74,0.05);"></div>
+
+    <div data-l="archtop" style="position:absolute; left:50%; top:0; width:120vw; height:30vh; transform:translateX(-50%); opacity:0; background:radial-gradient(60% 120% at 50% 0%, rgba(0,0,0,0) 40%, rgba(11,8,5,0.9) 72%);"></div>
+
+    <!-- divine form: light, not face -->
+    <div data-l="glow" style="position:absolute; left:50%; top:50%; width:40vh; height:74vh; transform:translate(-50%,-50%); opacity:0;">
+      <div data-l="glowcore" style="position:absolute; inset:0; background:radial-gradient(44% 40% at 50% 46%, rgba(255,244,214,0.95), rgba(232,201,122,0.55) 30%, rgba(200,162,74,0.18) 52%, rgba(0,0,0,0) 72%); filter:blur(2px); animation:auraBreathe 5.5s ease-in-out infinite;"></div>
+      <div data-l="mandorla" style="position:absolute; left:50%; top:46%; width:30vh; height:48vh; transform:translate(-50%,-50%); border-radius:50% 50% 48% 48%; background:radial-gradient(50% 56% at 50% 50%, rgba(232,201,122,0.0) 56%, rgba(232,201,122,0.10) 64%, rgba(0,0,0,0) 78%); box-shadow:0 0 90px 30px rgba(200,162,74,0.10) inset;"></div>
+      <!-- eyes: two soft points of presence -->
+      <div data-l="eyes" style="position:absolute; left:50%; top:41%; width:13vh; transform:translate(-50%,-50%); display:flex; justify-content:space-between; opacity:0;">
+        <span style="width:1.1vh; height:1.1vh; border-radius:50%; background:#fff6df; box-shadow:0 0 18px 5px rgba(255,238,196,0.9);"></span>
+        <span style="width:1.1vh; height:1.1vh; border-radius:50%; background:#fff6df; box-shadow:0 0 18px 5px rgba(255,238,196,0.9);"></span>
+      </div>
+    </div>
+
+    <!-- mandala sacred geometry -->
+    <svg data-l="mandala" viewBox="0 0 400 400" style="position:absolute; left:50%; top:50%; width:96vh; height:96vh; max-width:120vw; transform:translate(-50%,-50%); opacity:0; overflow:visible;">
+      <g fill="none" stroke="#d9b25a" stroke-width="0.7" data-draw style="filter:drop-shadow(0 0 6px rgba(217,178,90,.5));">
+        <circle cx="200" cy="200" r="60" pathLength="1"></circle>
+        <circle cx="200" cy="200" r="104" pathLength="1"></circle>
+        <circle cx="200" cy="200" r="150" pathLength="1"></circle>
+        <circle cx="200" cy="200" r="190" pathLength="1"></circle>
+        <polygon points="200,30 348,285 52,285" pathLength="1"></polygon>
+        <polygon points="200,370 52,115 348,115" pathLength="1"></polygon>
+      </g>
+      <g data-l="spokes" stroke="#caa24a" stroke-width="0.5" opacity="0.55"></g>
+    </svg>
+
+    <!-- single peacock feather + flute, symbolic -->
+    <svg data-l="feather" viewBox="0 0 200 200" style="position:absolute; left:50%; top:50%; width:34vh; height:34vh; transform:translate(-50%,-46%); opacity:0; overflow:visible;">
+      <g stroke="#e8c97a" fill="none" stroke-width="1.1" stroke-linecap="round" style="filter:drop-shadow(0 0 5px rgba(232,201,122,.6));">
+        <path d="M100 168 C100 120 96 96 100 64" pathLength="1"></path>
+        <ellipse cx="100" cy="52" rx="13" ry="20" pathLength="1"></ellipse>
+        <ellipse cx="100" cy="52" rx="5.5" ry="9" fill="rgba(232,201,122,.4)" pathLength="1"></ellipse>
+        <path d="M100 90 C84 84 78 74 76 62" pathLength="1"></path>
+        <path d="M100 90 C116 84 122 74 124 62" pathLength="1"></path>
+      </g>
+    </svg>
+
+    <canvas data-l="canvas" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none;"></canvas>
+
+    <!-- calligraphy of the holy name -->
+    <div data-l="calli" style="position:absolute; left:0; right:0; top:50%; transform:translateY(-50%); text-align:center; opacity:0; font-family:'Tiro Devanagari Hindi',serif; font-size:clamp(20px,3.2vw,46px); letter-spacing:.04em; line-height:1.9; color:#e8c97a; text-shadow:0 0 26px rgba(232,201,122,.55); padding:0 6vw;">
+      हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे<br>हरे राम हरे राम राम राम हरे हरे
+    </div>
+
+    <div data-l="wash" style="position:absolute; inset:0; opacity:0; background:radial-gradient(60% 60% at 50% 48%, rgba(255,248,228,0.98), rgba(232,201,122,0.8) 40%, rgba(200,162,74,0.5) 70%, rgba(255,248,228,0.2));"></div>
+
+    <button data-l="skip" onClick="{{ skip }}" style="position:absolute; right:26px; bottom:24px; z-index:5; background:transparent; border:1px solid rgba(200,162,74,0.28); color:rgba(232,224,206,0.65); font-family:'Marcellus',serif; letter-spacing:.22em; font-size:11px; text-transform:uppercase; padding:9px 18px; border-radius:30px; cursor:pointer; transition:all .4s;" style-hover="color:#f0e6d2; border-color:rgba(200,162,74,0.6);">Enter Temple</button>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <nav data-l="nav" style="position:fixed; top:0; left:0; right:0; z-index:40; display:flex; align-items:center; justify-content:space-between; padding:20px clamp(20px,4vw,56px); opacity:0; transition:opacity 1s ease 0.3s; pointer-events:none; mix-blend-mode:normal;">
+    <div style="display:flex; align-items:center; gap:13px;">
+      <span style="width:34px; height:34px; border-radius:50%; border:1px solid rgba(200,162,74,0.5); display:flex; align-items:center; justify-content:center; color:#d9b25a; font-size:17px;">ॐ</span>
+      <span style="font-family:'Marcellus',serif; letter-spacing:.18em; font-size:13px; color:#e8dfcd; text-transform:uppercase;">Chaitanya Gaudiya Math</span>
+    </div>
+    <div style="display:flex; gap:30px; align-items:center; font-family:'Marcellus',serif; letter-spacing:.16em; font-size:11.5px; text-transform:uppercase; color:#b8ab93;">
+      <a href="#origin" style="color:inherit; text-decoration:none; transition:color .3s;" style-hover="color:#e8c97a;">Origin</a>
+      <a href="#parampara" style="color:inherit; text-decoration:none; transition:color .3s;" style-hover="color:#e8c97a;">Parampara</a>
+      <a href="#wisdom" style="color:inherit; text-decoration:none; transition:color .3s;" style-hover="color:#e8c97a;">Wisdom</a>
+      <a href="#archive" style="color:inherit; text-decoration:none; transition:color .3s;" style-hover="color:#e8c97a;">Library</a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header style="position:relative; z-index:5; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 6vw 80px;">
+    <div data-parallax="0.18" style="position:absolute; left:50%; top:46%; width:min(86vw,820px); height:min(86vw,820px); transform:translate(-50%,-50%); pointer-events:none; opacity:0.5;">
+      <div style="position:absolute; inset:0; border-radius:50%; border:1px solid rgba(200,162,74,0.10); animation:spinSlow 90s linear infinite;"></div>
+      <div style="position:absolute; inset:8%; border-radius:50%; border:1px solid rgba(200,162,74,0.07); animation:spinRev 120s linear infinite;"></div>
+      <div style="position:absolute; inset:50% auto auto 50%; width:300px; height:300px; transform:translate(-50%,-50%); border-radius:50%; background:radial-gradient(circle, rgba(200,162,74,0.10), rgba(0,0,0,0) 70%);"></div>
+    </div>
+    <p data-hero="1" style="margin:0 0 26px; font-family:'Tiro Devanagari Hindi',serif; font-size:clamp(13px,1.5vw,17px); letter-spacing:.06em; color:#c8a24a; opacity:0; transition:opacity 1.4s ease .2s, transform 1.4s ease .2s; transform:translateY(20px);">श्री श्री गुरु गौराङ्गौ जयतः</p>
+    <h1 data-hero="2" style="margin:0; font-weight:300; font-size:clamp(40px,7.4vw,108px); line-height:1.02; letter-spacing:-0.01em; color:#f3ead9; opacity:0; transition:opacity 1.5s ease .45s, transform 1.5s ease .45s; transform:translateY(26px);">Sree Chaitanya<br><em style="font-style:italic; color:#e8c97a;">Gaudiya</em> Math</h1>
+    <div data-hero="3" style="width:62px; height:1px; background:linear-gradient(90deg,rgba(200,162,74,0),#c8a24a,rgba(200,162,74,0)); margin:36px 0 30px; opacity:0; transition:opacity 1.4s ease .8s;"></div>
+    <p data-hero="3b" style="max-width:600px; margin:0; font-size:clamp(16px,2vw,21px); line-height:1.7; color:#c3b69e; font-weight:300; opacity:0; transition:opacity 1.4s ease .95s, transform 1.4s ease .95s; transform:translateY(20px);">A living river of devotion flowing from Sri Krishna Chaitanya Mahaprabhu, who appeared in 1486 at Sree Dham Mayapur — carried, generation to generation, by an unbroken lineage of grace.</p>
+    <div data-hero="4" style="position:absolute; bottom:40px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; opacity:0; transition:opacity 1.4s ease 1.4s; color:#9a8f78;">
+      <span style="font-family:'Marcellus',serif; letter-spacing:.24em; font-size:10px; text-transform:uppercase;">Descend Within</span>
+      <span style="font-size:18px; animation:scrollDip 2.2s ease-in-out infinite;">⌄</span>
+    </div>
+  </header>
+
+  <!-- ============ CHAPTER I — ORIGIN ============ -->
+  <section id="origin" style="position:relative; z-index:5; padding:clamp(80px,12vh,160px) clamp(20px,6vw,90px); max-width:1240px; margin:0 auto;">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:clamp(40px,6vw,90px); align-items:center;">
+      <div data-reveal style="position:relative;">
+        <span style="font-family:'Marcellus',serif; letter-spacing:.3em; font-size:11px; text-transform:uppercase; color:#9c7a2e;">Chapter I · The Appearance</span>
+        <h2 style="margin:22px 0 0; font-weight:300; font-size:clamp(30px,4.4vw,58px); line-height:1.1; color:#f3ead9;">When light descended<br>upon <em style="font-style:italic; color:#e8c97a;">Nabadwip</em></h2>
+        <p style="margin:30px 0 0; font-size:clamp(16px,1.4vw,19px); line-height:1.85; color:#c3b69e; font-weight:300; max-width:46ch;">In the golden dusk of 1486, the Supreme Lord descended as <strong style="color:#e8dfcd; font-weight:500;">Sri Krishna Chaitanya Mahaprabhu</strong> — born Vishvambhar Mishra in Navadvipa, West Bengal. He came not to be worshipped, but to teach the world how to love: the congregational chanting of the Holy Name, the <em style="font-style:italic;">Yuga-dharma</em> for this age.</p>
+        <p style="margin:22px 0 0; font-family:'Tiro Devanagari Hindi',serif; font-size:clamp(15px,1.3vw,18px); line-height:1.9; color:#a99c82;">श्री चैतन्य महाप्रभु ने इस कलियुग में हरिनाम संकीर्तन के माध्यम से प्रेमभक्ति का प्रचार किया — जीवमात्र के प्रति करुणा ही उनकी शिक्षा है।</p>
+      </div>
+      <div data-reveal style="position:relative;">
+        <div style="position:relative; aspect-ratio:4/5; border-radius:3px; overflow:hidden; background:linear-gradient(160deg,#1a130b,#0d0a06); box-shadow:0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,162,74,0.14);">
+          <img src="https://www.sreecgmath.org/image/index_image/chaitanya_mahaprabhu_4.avif" alt="Sri Chaitanya Mahaprabhu" referrerpolicy="no-referrer" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 22%;">
+          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(11,8,5,0.85), rgba(11,8,5,0) 45%);"></div>
+          <div style="position:absolute; left:24px; bottom:22px;">
+            <p style="margin:0; font-family:'Marcellus',serif; letter-spacing:.18em; font-size:10px; text-transform:uppercase; color:#c8a24a;">1486 – 1534 CE</p>
+            <p style="margin:6px 0 0; font-size:21px; color:#f3ead9;">Sri Chaitanya Mahaprabhu</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER II — PANCH TATTVA ============ -->
+  <section style="position:relative; z-index:5; padding:clamp(70px,9vh,130px) clamp(20px,6vw,90px); max-width:1320px; margin:0 auto;">
+    <div data-reveal style="text-align:center; max-width:680px; margin:0 auto 60px;">
+      <span style="font-family:'Marcellus',serif; letter-spacing:.3em; font-size:11px; text-transform:uppercase; color:#9c7a2e;">Chapter II · The Five Truths</span>
+      <h2 style="margin:20px 0 16px; font-weight:300; font-size:clamp(28px,4vw,52px); color:#f3ead9;">Pancha <em style="font-style:italic; color:#e8c97a;">Tattva</em></h2>
+      <p style="margin:0; font-size:clamp(15px,1.3vw,18px); line-height:1.8; color:#b8ab93; font-weight:300;">The one Supreme Truth, manifest as five — descending together to inaugurate the age of the Holy Name.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(184px,1fr)); gap:clamp(14px,1.6vw,24px);">
+      <sc-for list="{{ panch }}" as="p" hint-placeholder-count="5">
+        <div data-reveal style="position:relative; border-radius:3px; overflow:hidden; background:linear-gradient(165deg,#15100a,#0c0906); border:1px solid rgba(200,162,74,0.12); transition:transform .6s cubic-bezier(.2,.7,.2,1), border-color .6s;" style-hover="transform:translateY(-8px); border-color:rgba(200,162,74,0.4);">
+          <div style="position:relative; aspect-ratio:3/4; background:radial-gradient(70% 60% at 50% 30%, #241a0e, #0d0a06);">
+            <sc-if value="{{ p.img }}" hint-placeholder-val="{{ true }}">
+              <img src="{{ p.img }}" alt="{{ p.name }}" referrerpolicy="no-referrer" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 20%;">
+            </sc-if>
+            <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(11,8,5,0.95) 6%, rgba(11,8,5,0.1) 60%);"></div>
+            <span style="position:absolute; left:16px; top:14px; font-family:'Tiro Devanagari Hindi',serif; font-size:18px; color:#e8c97a; text-shadow:0 0 16px rgba(0,0,0,.8);">{{ p.glyph }}</span>
+          </div>
+          <div style="position:absolute; left:0; right:0; bottom:0; padding:18px 18px 20px;">
+            <p style="margin:0; font-family:'Tiro Devanagari Hindi',serif; font-size:13px; color:#c8a24a; letter-spacing:.02em;">{{ p.nameHi }}</p>
+            <p style="margin:4px 0 0; font-size:18px; color:#f3ead9; line-height:1.2;">{{ p.name }}</p>
+            <p style="margin:9px 0 0; font-size:13.5px; line-height:1.55; color:#a99c82; font-weight:300;">{{ p.role }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER III — GURU PARAMPARA ============ -->
+  <section id="parampara" style="position:relative; z-index:5; padding:clamp(80px,11vh,150px) clamp(20px,6vw,80px); max-width:1180px; margin:0 auto;">
+    <div data-reveal style="text-align:center; max-width:720px; margin:0 auto 18px;">
+      <span style="font-family:'Marcellus',serif; letter-spacing:.3em; font-size:11px; text-transform:uppercase; color:#9c7a2e;">Chapter III · The Unbroken Thread</span>
+      <h2 style="margin:20px 0 16px; font-weight:300; font-size:clamp(28px,4.2vw,56px); color:#f3ead9;">Guru <em style="font-style:italic; color:#e8c97a;">Parampara</em></h2>
+      <p style="margin:0 0 8px; font-size:clamp(15px,1.3vw,18px); line-height:1.8; color:#b8ab93; font-weight:300;">Grace does not pass through books, but from heart to heart. Follow the lamp as it is lit, again and again, across the generations. <em style="font-style:italic; color:#9c8a6a;">Touch a name to receive its light.</em></p>
+    </div>
+
+    <div style="position:relative; margin-top:50px;">
+      <div data-l="thread" style="position:absolute; left:36px; top:10px; bottom:10px; width:1px; background:linear-gradient(to bottom, rgba(200,162,74,0), rgba(200,162,74,0.5), rgba(200,162,74,0)); ">
+        <div style="position:absolute; inset:0; background:linear-gradient(to bottom, rgba(232,201,122,0), rgba(232,201,122,0.9), rgba(232,201,122,0)); filter:blur(2px); opacity:.6;"></div>
+      </div>
+      <sc-for list="{{ parampara }}" as="g" hint-placeholder-count="4">
+        <div data-reveal style="position:relative; padding:0 0 clamp(26px,4vh,52px) clamp(78px,9vw,108px);">
+          <button onClick="{{ g.onToggle }}" style="position:absolute; left:0; top:2px; width:74px; height:74px; border-radius:50%; padding:0; border:1px solid rgba(200,162,74,0.4); background:#0d0a06; cursor:pointer; overflow:hidden; transition:all .5s; animation:nodeGlow 6s ease-in-out infinite;" style-hover="border-color:#e8c97a; transform:scale(1.05);">
+            <img src="{{ g.img }}" alt="{{ g.name }}" referrerpolicy="no-referrer" style="width:100%; height:100%; object-fit:cover; object-position:center 18%;">
+          </button>
+          <div onClick="{{ g.onToggle }}" style="cursor:pointer; padding-top:2px;">
+            <p style="margin:0; font-family:'Marcellus',serif; letter-spacing:.2em; font-size:10.5px; text-transform:uppercase; color:#9c7a2e;">{{ g.era }}</p>
+            <p style="margin:7px 0 0; font-family:'Tiro Devanagari Hindi',serif; font-size:15px; color:#c8a24a;">{{ g.nameHi }}</p>
+            <h3 style="margin:3px 0 0; font-weight:400; font-size:clamp(21px,2.5vw,30px); color:#f3ead9; line-height:1.18;">{{ g.name }}</h3>
+            <p style="margin:9px 0 0; font-size:14.5px; line-height:1.6; color:#a99c82; font-weight:300; max-width:60ch;">{{ g.role }}</p>
+          </div>
+          <sc-if value="{{ g.open }}" hint-placeholder-val="{{ false }}">
+            <div style="overflow:hidden; margin-top:18px; max-width:64ch; border-left:1px solid rgba(200,162,74,0.25); padding:4px 0 4px 22px; animation:auraBreathe 0s;">
+              <p style="margin:0; font-size:16px; line-height:1.85; color:#cbbfa6; font-weight:300;">{{ g.bio }}</p>
+              <p style="margin:16px 0 0; font-family:'Tiro Devanagari Hindi',serif; font-size:15px; line-height:1.9; color:#9c8f76;">{{ g.bioHi }}</p>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER IV — DAILY WISDOM ============ -->
+  <section id="wisdom" style="position:relative; z-index:5; padding:clamp(90px,12vh,160px) clamp(20px,6vw,80px); overflow:hidden;">
+    <div data-parallax="0.1" style="position:absolute; left:50%; top:50%; width:min(70vw,640px); height:min(70vw,640px); transform:translate(-50%,-50%); pointer-events:none; border-radius:50%; background:radial-gradient(circle, rgba(200,162,74,0.07), rgba(0,0,0,0) 68%);"></div>
+    <div data-reveal style="position:relative; max-width:860px; margin:0 auto; text-align:center;">
+      <span style="font-family:'Marcellus',serif; letter-spacing:.3em; font-size:11px; text-transform:uppercase; color:#9c7a2e;">Chapter IV · Daily Darshan of Wisdom</span>
+      <div style="margin:40px auto 0; min-height:230px; display:flex; flex-direction:column; justify-content:center;">
+        <span style="font-size:60px; line-height:0.4; color:rgba(200,162,74,0.35); font-family:Georgia,serif;">“</span>
+        <p data-l="quoteText" style="margin:18px auto 0; font-size:clamp(20px,2.7vw,33px); line-height:1.5; font-weight:300; color:#ece4d6; max-width:24ch; transition:opacity .5s; min-height:1.5em;">{{ quote.text }}</p>
+        <div style="margin:30px auto 0; width:40px; height:1px; background:rgba(200,162,74,0.5);"></div>
+        <p data-l="quoteBy" style="margin:18px 0 0; font-family:'Marcellus',serif; letter-spacing:.14em; font-size:13px; text-transform:uppercase; color:#c8a24a; transition:opacity .5s;">{{ quote.by }}</p>
+        <p style="margin:5px 0 0; font-size:14px; color:#8c8169; font-style:italic;">{{ quote.role }}</p>
+      </div>
+      <button onClick="{{ drawQuote }}" style="margin-top:42px; background:transparent; border:1px solid rgba(200,162,74,0.4); color:#e8dfcd; font-family:'Marcellus',serif; letter-spacing:.2em; font-size:12px; text-transform:uppercase; padding:14px 30px; border-radius:34px; cursor:pointer; display:inline-flex; align-items:center; gap:12px; transition:all .4s;" style-hover="border-color:#e8c97a; background:rgba(200,162,74,0.08);">
+        <span style="font-size:15px;">✦</span> Receive Today's Wisdom
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER V — ARCHIVE ============ -->
+  <section id="archive" style="position:relative; z-index:5; padding:clamp(70px,10vh,140px) clamp(20px,6vw,80px); max-width:1180px; margin:0 auto;">
+    <div data-reveal style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:44px;">
+      <div>
+        <span style="font-family:'Marcellus',serif; letter-spacing:.3em; font-size:11px; text-transform:uppercase; color:#9c7a2e;">Chapter V · The Digital Library</span>
+        <h2 style="margin:20px 0 0; font-weight:300; font-size:clamp(28px,4vw,52px); color:#f3ead9;">Vaishnava <em style="font-style:italic; color:#e8c97a;">Mahima</em></h2>
+      </div>
+      <p style="margin:0; max-width:38ch; font-size:15px; line-height:1.75; color:#a99c82; font-weight:300;">An ever-growing archive of katha, lives of the saints, and the glories of devotion — preserved and made searchable for seekers of every generation.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1px; background:rgba(200,162,74,0.12); border:1px solid rgba(200,162,74,0.12);">
+      <sc-for list="{{ articles }}" as="a" hint-placeholder-count="6">
+        <a href="{{ a.url }}" target="_blank" rel="noreferrer" data-reveal style="display:block; background:#0c0906; padding:26px 24px 28px; text-decoration:none; transition:background .5s;" style-hover="background:#15100a;">
+          <p style="margin:0; font-family:'Marcellus',serif; letter-spacing:.16em; font-size:10px; text-transform:uppercase; color:#9c7a2e;">{{ a.cat }} · {{ a.date }}</p>
+          <h3 style="margin:14px 0 0; font-weight:400; font-size:19px; line-height:1.3; color:#ece4d6;">{{ a.title }}</h3>
+          <p style="margin:12px 0 0; font-size:14px; line-height:1.65; color:#8c8169; font-weight:300;">{{ a.excerpt }}</p>
+          <span style="display:inline-block; margin-top:16px; font-family:'Marcellus',serif; letter-spacing:.16em; font-size:11px; text-transform:uppercase; color:#c8a24a;">Read →</span>
+        </a>
+      </sc-for>
+    </div>
+    <div data-reveal style="margin-top:44px; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px;">
+      <div style="border:1px solid rgba(200,162,74,0.16); border-radius:3px; padding:26px 24px; background:linear-gradient(160deg,#15100a,#0c0906);">
+        <p style="margin:0; font-family:'Marcellus',serif; letter-spacing:.16em; font-size:10px; text-transform:uppercase; color:#9c7a2e;">Granth · Sacred Texts</p>
+        <h3 style="margin:12px 0 0; font-weight:400; font-size:21px; color:#f3ead9;">The Bhagavatam, chapter by chapter</h3>
+        <p style="margin:10px 0 0; font-size:14px; line-height:1.7; color:#a99c82; font-weight:300;">Srimad Bhagavatam, Tenth Canto and beyond — rendered with commentary from the acharyas of the line.</p>
+      </div>
+      <div style="border:1px solid rgba(200,162,74,0.16); border-radius:3px; padding:26px 24px; background:linear-gradient(160deg,#15100a,#0c0906);">
+        <p style="margin:0; font-family:'Marcellus',serif; letter-spacing:.16em; font-size:10px; text-transform:uppercase; color:#9c7a2e;">Magazine</p>
+        <h3 style="margin:12px 0 0; font-weight:400; font-size:21px; color:#f3ead9;">Monthly reflections</h3>
+        <p style="margin:10px 0 0; font-size:14px; line-height:1.7; color:#a99c82; font-weight:300;">Letters, discourses and seasonal wisdom from the Math — a quiet companion for daily sadhana.</p>
+      </div>
+      <div style="border:1px solid rgba(200,162,74,0.16); border-radius:3px; padding:26px 24px; background:linear-gradient(160deg,#15100a,#0c0906);">
+        <p style="margin:0; font-family:'Marcellus',serif; letter-spacing:.16em; font-size:10px; text-transform:uppercase; color:#9c7a2e;">Kirtan & Katha</p>
+        <h3 style="margin:12px 0 0; font-weight:400; font-size:21px; color:#f3ead9;">Voices of the line</h3>
+        <p style="margin:10px 0 0; font-size:14px; line-height:1.7; color:#a99c82; font-weight:300;">Recorded harikatha and sweet kirtan from the founding acharyas through the present guardian of the tradition.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="position:relative; z-index:5; margin-top:40px; padding:clamp(70px,9vh,120px) clamp(20px,6vw,80px) 40px; border-top:1px solid rgba(200,162,74,0.14); background:linear-gradient(to bottom, rgba(11,8,5,0), rgba(20,14,8,0.5));">
+    <div style="max-width:1180px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:48px;">
+      <div data-reveal>
+        <span style="display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:50%; border:1px solid rgba(200,162,74,0.5); color:#d9b25a; font-size:22px;">ॐ</span>
+        <h3 style="margin:20px 0 0; font-weight:300; font-size:26px; color:#f3ead9;">Sree Chaitanya Gaudiya Math</h3>
+        <p style="margin:12px 0 0; font-size:14px; line-height:1.7; color:#8c8169; max-width:34ch; font-weight:300;">Where the chanting of the Holy Name has never ceased since 1486 — a sanctuary open to every soul who seeks.</p>
+      </div>
+      <div data-reveal>
+        <p style="margin:0; font-family:'Marcellus',serif; letter-spacing:.2em; font-size:11px; text-transform:uppercase; color:#9c7a2e;">Our Centers</p>
+        <ul style="list-style:none; padding:0; margin:18px 0 0; display:flex; flex-direction:column; gap:11px; font-size:15px; color:#c3b69e; font-weight:300;">
+          <li>Sree Dham Mayapur · Nadia, West Bengal</li>
+          <li>Delhi · Pahar Ganj Math</li>
+          <li>Branches across India & abroad</li>
+        </ul>
+      </div>
+      <div data-reveal>
+        <p style="margin:0; font-family:'Marcellus',serif; letter-spacing:.2em; font-size:11px; text-transform:uppercase; color:#9c7a2e;">Begin Again</p>
+        <p style="margin:18px 0 0; font-size:15px; line-height:1.7; color:#c3b69e; font-weight:300;">Return to the threshold and receive darshan once more.</p>
+        <button onClick="{{ replay }}" style="margin-top:18px; background:transparent; border:1px solid rgba(200,162,74,0.4); color:#e8dfcd; font-family:'Marcellus',serif; letter-spacing:.18em; font-size:11px; text-transform:uppercase; padding:12px 24px; border-radius:30px; cursor:pointer; transition:all .4s;" style-hover="border-color:#e8c97a; background:rgba(200,162,74,0.08);">↻ Replay the Darshan</button>
+      </div>
+    </div>
+    <p style="text-align:center; margin:64px 0 0; font-size:12px; letter-spacing:.08em; color:#6b6253;">A reverent digital reimagining · in service of Sree Chaitanya Gaudiya Math · हरे कृष्ण</p>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;}}">
+class Component extends DCLogic {
+  state = { openId: 0, quoteIndex: 0 };
+
+  // ---------- data ----------
+  get IMG(){ return 'https://www.sreecgmath.org/image/'; }
+
+  get panch(){
+    return [
+      { name:'Chaitanya Mahaprabhu', nameHi:'श्री चैतन्य महाप्रभु', glyph:'ॐ', role:'The Golden Avatar — Krishna in the mood of His own devotee.', img:this.IMG+'index_image/chaitanya_mahaprabhu_4.avif' },
+      { name:'Nityananda Prabhu', nameHi:'श्री नित्यानन्द प्रभु', glyph:'卐', role:'Non-different from Lord Balaram — the original spiritual master, ocean of mercy.', img:this.IMG+'index_image/nityanandji.jpg' },
+      { name:'Advaita Acharya', nameHi:'श्री अद्वैत आचार्य', glyph:'✿', role:'Whose loud prayers called the Lord to descend for the deliverance of all.', img:this.IMG+'index_image/advaita_acharya_ji.jpg' },
+      { name:'Gadadhara Pandit', nameHi:'श्री गदाधर पण्डित', glyph:'❀', role:'The lifelong companion — embodiment of the Lord\u2019s own internal devotional energy.', img:this.IMG+'index_image/gadadhara-pandit-ji.jpg' },
+      { name:'Srivasa Thakura', nameHi:'श्री श्रीवास ठाकुर', glyph:'☸', role:'In whose courtyard the first sankirtan blazed — the pure devotee, the bhakta-tattva.', img:'' },
+    ];
+  }
+
+  get lineage(){
+    return [
+      { id:0, era:'1874 – 1937 · Founder of Sree Chaitanya Math', nameHi:'श्रील भक्ति सिद्धांत सरस्वती गोस्वामी ठाकुर प्रभुपाद',
+        name:'Bhakti Siddhanta Saraswati Thakura Prabhupada',
+        role:'The lion-guru who rekindled the pure teaching of Sri Chaitanya across India.',
+        img:this.IMG+'index_image/prabhupad-ji.png',
+        bio:'In an age of compromise, His Divine Grace blazed as a lion of devotion — establishing sixty-four temples, ordaining a generation of preceptors, and re-establishing the pure conclusion of Sri Chaitanya Mahaprabhu without dilution. From his line flows the entire mission.',
+        bioHi:'श्रील प्रभुपाद ने इस युग में शुद्ध भक्ति-सिद्धांत की पुनर्स्थापना की और अनेक मठों एवं शिष्यों के माध्यम से महाप्रभु की वाणी को सम्पूर्ण भारत में प्रचारित किया।' },
+      { id:1, era:'1904 – 1979 · Founder-Acharya of Sree Chaitanya Gaudiya Math', nameHi:'श्रील भक्तिदयित माधव गोस्वामी महाराज',
+        name:'Bhakti Dayita Madhava Goswami Maharaja',
+        role:'The beloved disciple who founded Sree Chaitanya Gaudiya Math and carried the lamp forward.',
+        img:this.IMG+'index_image/Bhakti-Dayita-Madhav-Maharaj.jpg',
+        bio:'A most beloved disciple of Srila Prabhupada, he founded Sree Chaitanya Gaudiya Math and served the lineage with unshakable devotion and tender compassion — teaching that one-pointed chanting of the Holy Name is the highest and swiftest of all paths.',
+        bioHi:'\u201cहमें अन्य साधनों में न भटककर, श्रीकृष्ण के नाम और रूप की अभिन्नता में दृढ़ विश्वास रखते हुए एकाग्र भाव से नाम-कीर्तन करना चाहिए। यही सर्वोच्च भक्ति है।\u201d' },
+      { id:2, era:'1924 – 2017 · Former President, World Vaishnava Association', nameHi:'श्रील भक्ति वल्लभ तीर्थ गोस्वामी महाराज',
+        name:'Bhakti Ballabh Tirtha Goswami Maharaja',
+        role:'An embodiment of compassion who carried the message of universal love across the world.',
+        img:this.IMG+'index_image/bhakti-ballabh-tirth-maharaj.jpg',
+        bio:'Former President of Sree Chaitanya Gaudiya Math and the World Vaishnava Association, and founder of GOKUL — the Global Organisation of Krishna-Chaitanya\u2019s Universal Love. An embodiment of compassion, he carried the teaching to every continent, drawing countless souls to the shelter of the Holy Name.',
+        bioHi:'श्रील गुरुदेव करुणा के साक्षात् स्वरूप थे। \u201cश्रीगुरु की कृपा के बिना हम जन्म-मृत्यु के अनंत चक्र को पार नहीं कर सकते।\u201d' },
+      { id:3, era:'The Present Guardian of the Tradition', nameHi:'श्रील भक्ति विचार विष्णु गोस्वामी महाराज',
+        name:'Bhakti Vichar Vishnu Goswami Maharaja',
+        role:'Bringing the timeless harikatha into the rhythm of modern life — known to many as \u201cAtma ka Tonic.\u201d',
+        img:this.IMG+'acharya/BV_Vishnu_Maharaj.jpg',
+        bio:'The present spiritual guide of the Math, reaching seekers worldwide through \u201cAtma ka Tonic\u201d — a tonic for the soul. With clarity and warmth he translates the eternal teaching into the language and pace of the modern world, never losing a drop of its purity.',
+        bioHi:'वर्तमान में आप \u201cआत्मा का टॉनिक\u201d के माध्यम से सरल एवं मधुर भाषा में हरिकथा का प्रचार कर रहे हैं — आधुनिक जीवन में सनातन भक्ति का संदेश।' },
+    ];
+  }
+
+  get quotes(){
+    return [
+      { text:'Sri guru inherits the power of compassion directly from the Supreme Lord and descends to this earth enlivened with that power.', by:'Bhakti Ballabh Tirtha Maharaja', role:'World Vaishnava Association' },
+      { text:'Chanting the Lord\u2019s Name is the highest and foremost — no other form of devotion provides the promised result so quickly.', by:'Bhakti Dayita Madhava Maharaja', role:'Founder-Acharya, Sree Chaitanya Gaudiya Math' },
+      { text:'The day truly begins only when a person awakens to the right path — only then does the day become meaningful and blissful.', by:'Bhakti Vichar Vishnu Maharaja', role:'Atma ka Tonic' },
+      { text:'If you behave with love by mere speaking, it is not the actual association. Sri Rupa Goswami taught us how to truly associate with the sadhus.', by:'Bhakti Ballabh Tirtha Maharaja', role:'Glories of holy association' },
+      { text:'\u091c\u0917\u0924 \u0915\u0947 \u0938\u093e\u0925 \u0938\u094d\u0935\u092f\u0902 \u0915\u094b adjust \u0915\u0930\u0915\u0947, \u092a\u0930\u092e\u093e\u0930\u094d\u0925 \u092a\u0925 \u0938\u0947 \u0932\u0947\u0936\u092e\u093e\u0924\u094d\u0930 \u092d\u0940 \u0935\u093f\u091a\u094d\u092f\u0941\u0924 \u0928 \u0939\u094b\u0915\u0930 \u091a\u0932\u0928\u093e \u0939\u0940 \u092a\u0930\u092e\u093e\u0930\u094d\u0925 \u0915\u0947 \u0905\u0928\u0941\u0915\u0942\u0932 \u0939\u0948\u0964', by:'Bhakti Dayita Madhava Maharaja', role:'\u091c\u0917\u093e\u0927\u0930\u0940, 1954' },
+      { text:'When someone understands the purpose of life and walks the proper spiritual track, only then does life become blissful — otherwise one merely wanders in search of happiness.', by:'Bhakti Vichar Vishnu Maharaja', role:'On the awakened life' },
+    ];
+  }
+
+  get articles(){
+    const B='https://www.sreecgmath.org/';
+    return [
+      { cat:'Vaishnava Mahima', date:'07 May', title:'\u0936\u094d\u0930\u0940 \u0930\u093e\u092f \u0930\u093e\u092e\u093e\u0928\u0928\u094d\u0926 \u091c\u0940 \u0915\u093e \u0924\u093f\u0930\u094b\u092d\u093e\u0935', excerpt:'Beheld by Srila Bhaktivinoda Thakura as the form of Vishakha-devi — the confidential glory of one of the Lord\u2019s eternal associates.', url:B+'vaishnav_mahima' },
+      { cat:'Vaishnava Mahima', date:'02 May', title:'\u0936\u094d\u0930\u0940 \u092d\u0915\u094d\u0924\u093f \u0938\u093e\u0930\u0902\u0917 \u0917\u094b\u0938\u094d\u0935\u093e\u092e\u0940 \u092e\u0939\u093e\u0930\u093e\u091c', excerpt:'Appeared in 1888 in the village of Patrasayar — the life of a great soul who served the line with his whole being.', url:B+'vaishnav_mahima' },
+      { cat:'Acharya\u2019s Saying', date:'Latest', title:'When the day truly begins', excerpt:'A reflection on awakening to the right path — and how the meaning of a single day is decided.', url:B+'acharyas_saying?id=38&name=Srila-Bhakti-Vichar-Vishnu-Maharaja' },
+      { cat:'Acharya\u2019s Saying', date:'Latest', title:'The art of holy association', excerpt:'Sri Rupa Goswami\u2019s teaching on what it truly means to associate with the sadhus.', url:B+'acharyas_saying?id=37&name=Srila-Bhakti-Ballabh-Tirtha-Goswami-Maharaja' },
+      { cat:'Katha', date:'Articles', title:'\u0905\u092d\u093f\u092e\u093e\u0928 \u0915\u094b \u091b\u094b\u0921\u093c\u0915\u0930 \u092d\u091c\u0928', excerpt:'On surrendering pride as the very foundation of devotional practice — from the katha of the founder-acharya.', url:B+'acharyas_saying?id=36&name=Srila-Bhakti-Dayita-Madhav-Goswami-Maharaja' },
+      { cat:'Gaudiya Acharyas', date:'Archive', title:'Lives of the great preceptors', excerpt:'A connected archive of biographies — the saints whose grace forms the living chain of the parampara.', url:B+'gaudiya-acharyas' },
+    ];
+  }
+
+  // ---------- handlers ----------
+  toggle(id){ this.setState({ openId: this.state.openId === id ? -1 : id }); }
+  drawQuote(){
+    const n = this.quotes.length;
+    let i = this.state.quoteIndex;
+    while(i === this.state.quoteIndex && n > 1) i = Math.floor(Math.random()*n);
+    const tx = this.q('[data-l="quoteText"]'), by = this.q('[data-l="quoteBy"]'), rl = this.q('[data-l="quoteBy"]');
+    if(tx){ tx.style.opacity=0; }
+    if(by){ by.style.opacity=0; }
+    setTimeout(()=>{ this.setState({ quoteIndex:i }); setTimeout(()=>{ if(tx)tx.style.opacity=1; if(by)by.style.opacity=1; },30); }, 320);
+  }
+
+  q(sel){ return this.root ? this.root.querySelector(sel) : null; }
+
+  // ---------- lifecycle ----------
+  componentDidMount(){
+    this.root = document.querySelector('[data-droot]');
+    this.reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.cacheNodes();
+    this.buildSpokes();
+    this.initParticles();
+    this.startDarshan(this.reduced);
+    this.initReveal();
+    this.initParallax();
+  }
+  componentWillUnmount(){
+    cancelAnimationFrame(this._raf);
+    window.removeEventListener('resize', this._onResize);
+    window.removeEventListener('scroll', this._onScroll);
+    document.body.style.overflow='';
+  }
+
+  cacheNodes(){
+    const r=this.root, g=s=>r.querySelector('[data-l="'+s+'"]');
+    this.N = { canvas:g('canvas'), overlay:g('overlay'), blackbase:g('blackbase'), ray:g('ray'), ray2:g('ray2'),
+      pillarL:g('pillarL'), pillarR:g('pillarR'), archtop:g('archtop'), glow:g('glow'),
+      eyes:g('eyes'), mandala:g('mandala'), feather:g('feather'), calli:g('calli'),
+      wash:g('wash'), nav:g('nav') };
+    this.draws = Array.from(r.querySelectorAll('[data-draw] [pathLength], [data-draw][pathLength], [data-draw] circle, [data-draw] polygon'));
+    this.draws.forEach(d=>{ d.style.strokeDasharray='1'; d.style.strokeDashoffset='1'; });
+    this.heroEls = Array.from(r.querySelectorAll('[data-hero]'));
+    r.querySelectorAll('img').forEach(im=>{ im.addEventListener('error',()=>{ im.style.opacity=0; }); });
+  }
+
+  buildSpokes(){
+    const sp=this.N.mandala && this.N.mandala.querySelector('[data-l="spokes"]');
+    if(!sp) return;
+    let s='';
+    for(let i=0;i<24;i++){ const a=i*15*Math.PI/180; const x1=200+60*Math.cos(a), y1=200+60*Math.sin(a); const x2=200+190*Math.cos(a), y2=200+190*Math.sin(a); s+='<line x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'"/>'; }
+    sp.innerHTML=s;
+  }
+
+  // ---------- particles ----------
+  initParticles(){
+    const cv=this.N.canvas; this.ctx=cv.getContext('2d');
+    const resize=()=>{ this.dpr=Math.min(window.devicePixelRatio||1,2); this.W=window.innerWidth; this.H=window.innerHeight; cv.width=this.W*this.dpr; cv.height=this.H*this.dpr; this.ctx.setTransform(this.dpr,0,0,this.dpr,0,0); };
+    this._onResize=resize; resize(); window.addEventListener('resize',resize);
+    const N = this.reduced ? 40 : 150; this.P=[];
+    for(let i=0;i<N;i++) this.P.push(this.newP(true));
+    this.pmode='rise';
+  }
+  newP(init){
+    return { x:Math.random()*this.W, y:init?Math.random()*this.H:this.H+10,
+      r:Math.random()*2.2+0.5, sp:Math.random()*0.4+0.12, sw:Math.random()*0.6+0.1,
+      ph:Math.random()*Math.PI*2, a:Math.random()*0.5+0.2,
+      vx:(Math.random()-0.5)*0.4, vy:(Math.random()-0.5)*0.4 };
+  }
+  stepParticles(dt){
+    const cx=this.W/2, cy=this.H*0.46;
+    for(const p of this.P){
+      if(this.pmode==='rise'||this.pmode==='ambient'){
+        p.y-=p.sp*(this.pmode==='ambient'?0.5:1)*dt*0.06;
+        p.ph+=0.01*dt*0.06; p.x+=Math.sin(p.ph)*p.sw*0.3;
+        if(p.y< -10){ p.y=this.H+10; p.x=Math.random()*this.W; }
+      } else if(this.pmode==='freeze'){
+        p.ph+=0.005*dt*0.06;
+      } else if(this.pmode==='scatter'){
+        p.x+=(p.x-cx)*0.012*dt*0.06*1.4 + p.vx*dt*0.06;
+        p.y+=(p.y-cy)*0.012*dt*0.06*1.4 + p.vy*dt*0.06;
+      }
+    }
+  }
+  drawParticles(){
+    const c=this.ctx; c.clearRect(0,0,this.W,this.H);
+    const cx=this.W/2;
+    let base = this.pmode==='ambient'?0.32 : this.pmode==='scatter'?0.7 : 0.85;
+    for(const p of this.P){
+      let prox = 1 - Math.min(Math.abs(p.x-cx)/(this.W*0.5),1);
+      let alpha = p.a * base * (0.4 + prox*0.6);
+      if(this.pmode==='scatter'){ const d=Math.hypot(p.x-cx,p.y-this.H*0.46); alpha*=Math.max(0,1-d/(this.W*0.6)); }
+      if(alpha<=0.01) continue;
+      c.beginPath(); c.arc(p.x,p.y,p.r,0,6.283);
+      c.fillStyle='rgba(232,201,122,'+alpha.toFixed(3)+')'; c.fill();
+      if(p.r>1.6){ c.beginPath(); c.arc(p.x,p.y,p.r*2.4,0,6.283); c.fillStyle='rgba(232,201,122,'+(alpha*0.12).toFixed(3)+')'; c.fill(); }
+    }
+  }
+
+  // ---------- darshan timeline ----------
+  startDarshan(skip){
+    this.t0 = performance.now() - (skip?8400:0);
+    this.revealed=false; this.lastNow=performance.now();
+    if(!skip) document.body.style.overflow='hidden';
+    const loop=(now)=>{
+      const dt=Math.min(now-this.lastNow,50); this.lastNow=now;
+      const t=now-this.t0;
+      this.frame(t);
+      this.stepParticles(dt); this.drawParticles();
+      this.parallaxTick();
+      this._raf=requestAnimationFrame(loop);
+    };
+    this._raf=requestAnimationFrame(loop);
+  }
+  clamp(v,a,b){ return v<a?a:v>b?b:v; }
+  R(t,a,b){ return this.clamp((t-a)/(b-a),0,1); }
+  S(x){ return x*x*(3-2*x); }
+  set(node,prop,val){ if(node) node.style[prop]=val; }
+
+  frame(t){
+    const N=this.N, R=(a,b)=>this.R(t,a,b), S=this.S.bind(this);
+    // particle mode
+    this.pmode = t<5900?'rise' : t<6900?'freeze' : t<8500?'scatter' : 'ambient';
+    // ray
+    this.set(N.ray,'opacity', (S(R(600,2300))*(1-R(7000,8300))).toFixed(3));
+    this.set(N.ray2,'opacity', (S(R(900,2600))*0.8*(1-R(7000,8300))).toFixed(3));
+    // pillars / arch
+    const po=S(R(1700,4000))*(1-R(6900,8100));
+    this.set(N.pillarL,'opacity',(po*0.95).toFixed(3));
+    this.set(N.pillarR,'opacity',(po*0.95).toFixed(3));
+    const px=(140-94*S(R(1700,4400)));
+    this.set(N.pillarL,'transform','translateX(-'+px.toFixed(1)+'px)');
+    this.set(N.pillarR,'transform','translateX('+px.toFixed(1)+'px)');
+    this.set(N.archtop,'opacity',(po*0.9).toFixed(3));
+    // glow / divine form
+    const go=S(R(3500,5800))*(1-R(7200,8500));
+    this.set(N.glow,'opacity',go.toFixed(3));
+    const gs=0.72+0.28*S(R(3500,6000));
+    this.set(N.glow,'transform','translate(-50%,-50%) scale('+gs.toFixed(3)+')');
+    // mandala draw
+    const mo=S(R(3700,5600))*(1-R(7800,9100));
+    this.set(N.mandala,'opacity',mo.toFixed(3));
+    const draw=S(R(3800,6300));
+    const off=(1-draw).toFixed(3);
+    if(this.draws) this.draws.forEach(d=>{ d.style.strokeDashoffset=off; });
+    this.set(N.mandala,'transform','translate(-50%,-50%) rotate('+(t*0.004).toFixed(2)+'deg)');
+    // feather + flute
+    this.set(N.feather,'opacity',(S(R(4600,6200))*0.92*(1-R(7000,8300))).toFixed(3));
+    // eyes — the darshan pause
+    const eg=this.clamp(S(R(5900,6250))-S(R(6750,7150)),0,1);
+    this.set(N.eyes,'opacity',eg.toFixed(3));
+    // black backdrop fades out beneath the wash
+    this.set(N.blackbase,'opacity',(1-S(R(7900,8700))).toFixed(3));
+    // calligraphy
+    this.set(N.calli,'opacity',(S(R(7000,8200))*(1-R(8900,9700))).toFixed(3));
+    // wash
+    const wash=S(R(7500,8500))*(1-this.S(this.R(t,8800,9700)));
+    this.set(N.wash,'opacity',(wash*0.96).toFixed(3));
+    // reveal site — born from the light
+    if(t>8500 && !this.revealed){
+      this.revealed=true;
+      document.body.style.overflow='';
+      const cv=this.N.canvas; cv.style.position='fixed'; cv.style.zIndex='1';
+      this.root.insertBefore(cv, this.root.firstChild);
+      this.N.overlay.style.pointerEvents='none';
+      this.N.nav.style.opacity='1'; this.N.nav.style.pointerEvents='auto';
+      this.heroEls.forEach(e=>{ e.style.opacity='1'; e.style.transform='none'; });
+    }
+    if(t>9750){ this.N.overlay.style.display='none'; }
+  }
+
+  skip(){ this.t0 = performance.now() - 8350; if(this.N) this.N.overlay.style.display=''; }
+  replay(){
+    this.N.overlay.style.display=''; this.N.overlay.style.pointerEvents='';
+    this.N.nav.style.opacity='0'; this.N.nav.style.pointerEvents='none';
+    this.heroEls.forEach(e=>{ e.style.opacity=''; e.style.transform=''; });
+    const cv=this.N.canvas; cv.style.position='absolute'; cv.style.zIndex='';
+    this.N.overlay.insertBefore(cv, this.N.wash);
+    this.P.forEach((p)=>{ Object.assign(p, this.newP(true)); });
+    window.scrollTo({top:0,behavior:'smooth'});
+    this.t0=performance.now(); this.revealed=false; document.body.style.overflow='hidden';
+  }
+
+  // ---------- reveal + parallax ----------
+  initReveal(){
+    const els=this.root.querySelectorAll('[data-reveal]');
+    if(!('IntersectionObserver' in window)){ els.forEach(e=>e.classList.add('seen')); return; }
+    const io=new IntersectionObserver((ents)=>{ ents.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('seen'); io.unobserve(en.target);} }); },{ threshold:0.12, rootMargin:'0px 0px -8% 0px' });
+    els.forEach(e=>io.observe(e));
+  }
+  initParallax(){
+    this.plx=Array.from(this.root.querySelectorAll('[data-parallax]')).map(el=>({el,f:parseFloat(el.getAttribute('data-parallax'))||0.1}));
+    this._onScroll=()=>{ this._sy=window.scrollY; };
+    window.addEventListener('scroll',this._onScroll,{passive:true}); this._sy=window.scrollY||0;
+  }
+  parallaxTick(){
+    if(!this.plx) return;
+    for(const p of this.plx){
+      const rect=p.el.getBoundingClientRect();
+      const center=rect.top+rect.height/2-this.H/2;
+      const off=(-center*p.f).toFixed(1);
+      p.el.style.transform='translate(-50%, calc(-50% + '+off+'px))';
+    }
+  }
+
+  renderVals(){
+    const open=this.state.openId;
+    const parampara=this.lineage.map(g=>({ ...g, open: open===g.id, onToggle: ()=>this.toggle(g.id) }));
+    return {
+      panch:this.panch,
+      parampara,
+      quote:this.quotes[this.state.quoteIndex],
+      drawQuote:()=>this.drawQuote(),
+      replay:()=>this.replay(),
+      skip:()=>this.skip(),
+    };
+  }
+}
+</script>
+</body>
+</html>
