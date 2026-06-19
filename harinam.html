@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harinam Photographs – Sri Chaitanya Gaudiya Math, Chandigarh</title>
+  <meta name="description" content="Moments of sankirtan and celebration at Sri Chaitanya Gaudiya Math, Sector 20 Chandigarh.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #fbf5ea; color: #4a3d29; font-family: 'Spectral', Georgia, serif; --accent: #d9772e; --gold: #b78a32; }
+    ::selection { background: rgba(217,119,46,0.18); color: #33281a; }
+    img { display: block; }
+    a { transition: color .3s; }
+
+    [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1.1s cubic-bezier(.2,.7,.2,1); }
+    [data-reveal].seen { opacity: 1; transform: none; }
+
+    /* NAV */
+    #site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px clamp(22px,4vw,58px);
+      transition: background .5s ease, box-shadow .5s ease, padding .5s ease;
+    }
+    #site-nav.scrolled { background: rgba(251,245,234,0.94); box-shadow: 0 1px 0 rgba(150,116,40,0.16); padding-top: 12px; padding-bottom: 12px; }
+    .nav-logo { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+    .nav-logo-name { font-family: 'Marcellus',serif; font-size: 15px; letter-spacing: .04em; color: #33281a; }
+    .nav-logo-sub  { font-family: 'Marcellus',serif; font-size: 10px; letter-spacing: .42em; text-transform: uppercase; color: var(--accent); margin-top: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; font-family: 'Marcellus',serif; font-size: 12.5px; letter-spacing: .08em; color: #6b5d45; }
+    .nav-links a { color: inherit; text-decoration: none; display: flex; align-items: center; gap: 4px; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.active { color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+    .nav-links a[target="_blank"]::after { content: '↗'; font-size: 9px; opacity: .5; margin-left: 2px; }
+    .nav-cta { font-family: 'Marcellus',serif; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--accent); padding: 11px 20px; border-radius: 30px; text-decoration: none; box-shadow: 0 6px 18px rgba(217,119,46,0.28); transition: transform .3s, box-shadow .3s; }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(217,119,46,0.36); }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: clamp(130px,18vh,190px) clamp(22px,5vw,80px) clamp(50px,7vh,80px);
+      max-width: 1240px; margin: 0 auto;
+    }
+    .section-label { margin: 0 0 16px; font-family: 'Marcellus',serif; font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); }
+    .page-h1 { margin: 0; font-family: 'Marcellus',serif; font-weight: 400; font-size: clamp(36px,5vw,68px); line-height: 1.06; color: #2e2417; }
+    .page-subtitle { margin: 20px 0 0; font-family: 'Spectral',serif; font-style: italic; font-weight: 300; font-size: clamp(17px,1.6vw,21px); color: #6b5d45; max-width: 54ch; }
+    .page-divider { border: none; border-top: 1px solid rgba(150,116,40,0.2); margin: 48px 0 0; }
+
+    /* GALLERY */
+    .gallery-section { padding: clamp(48px,7vh,90px) clamp(22px,5vw,80px) clamp(72px,11vh,140px); max-width: 1240px; margin: 0 auto; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px,1.6vw,22px); }
+    .gallery-fig { margin: 0; position: relative; border-radius: 8px; overflow: hidden; background: #efe2c6; box-shadow: 0 12px 32px rgba(120,80,20,0.12); }
+    .gallery-fig.large { grid-column: span 2; }
+    .gallery-fig img { width: 100%; height: 100%; object-fit: cover; min-height: 240px; transition: transform 1s ease; }
+    .gallery-fig:hover img { transform: scale(1.04); }
+    .gallery-fig figcaption {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 32px 20px 18px;
+      background: linear-gradient(to top, rgba(46,36,23,0.65), transparent);
+      font-family: 'Marcellus',serif; font-size: 12.5px; letter-spacing: .14em;
+      text-transform: uppercase; color: #fff7e6;
+    }
+
+    /* QUOTE BANNER */
+    .quote-banner {
+      background: #f4e9d5; border-top: 1px solid rgba(150,116,40,0.18); border-bottom: 1px solid rgba(150,116,40,0.18);
+      padding: clamp(40px,6vh,72px) clamp(22px,5vw,80px);
+      text-align: center;
+    }
+    .quote-banner blockquote {
+      margin: 0 auto; max-width: 64ch;
+      font-family: 'Spectral',serif; font-style: italic; font-weight: 300;
+      font-size: clamp(19px,2vw,26px); line-height: 1.65; color: #4a3d29;
+    }
+    .quote-banner figcaption { margin-top: 18px; font-family: 'Marcellus',serif; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+
+    /* BACK LINK */
+    .back-link { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 40px; font-family: 'Marcellus',serif; font-size: 13px; letter-spacing: .06em; color: #8a5a22; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .3s; }
+    .back-link:hover { border-color: var(--accent); }
+
+    /* FOOTER */
+    footer { background: #fbf5ea; border-top: 1px solid rgba(150,116,40,0.18); padding: clamp(40px,6vh,70px) clamp(22px,5vw,80px) 32px; }
+    .footer-bottom { max-width: 1140px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 12.5px; color: #9a8c70; }
+    .footer-bottom-hi { font-family: 'Tiro Devanagari Hindi',serif; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-fig.large { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="site-nav">
+  <a href="index.html" class="nav-logo">
+    <svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true">
+      <g stroke="var(--accent)" stroke-width="1.3" fill="none">
+        <circle cx="20" cy="20" r="6" fill="var(--accent)" stroke="none"></circle>
+        <circle cx="20" cy="20" r="11"></circle>
+      </g>
+      <g id="nav-ticks" stroke="var(--gold)" stroke-width="1.2"></g>
+    </svg>
+    <span style="display:flex;flex-direction:column;line-height:1.05;">
+      <span class="nav-logo-name">Sri Chaitanya Gaudiya Math</span>
+      <span class="nav-logo-sub">Chandigarh</span>
+    </span>
+  </a>
+  <div class="nav-links">
+    <a href="https://drive.google.com/file/d/1UXDkEpu5Elma1FzoRUCAYJ8rzeSp6gs_/view" target="_blank" rel="noreferrer">Panchang Calendar</a>
+    <a href="harinam.html" class="active">Harinam Photos</a>
+    <a href="acharyas.html">The Acharyas</a>
+    <a href="https://www.youtube.com/@Atmakatonic" target="_blank" rel="noreferrer">Atma ka Tonic</a>
+  </div>
+  <a href="index.html#visit" class="nav-cta">Sewa · Donation</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <a href="index.html" class="back-link" data-reveal>← Back to the Math</a>
+  <div data-reveal>
+    <p class="section-label">Temple Gallery</p>
+    <h1 class="page-h1">Divine Harinam<br>Photographs</h1>
+    <p class="page-subtitle">Moments of sankirtan and celebration at Sri Chaitanya Gaudiya Math — every image a window into joyful devotion.</p>
+  </div>
+  <hr class="page-divider">
+</div>
+
+<!-- GALLERY -->
+<div class="gallery-section">
+  <div class="gallery-grid" data-reveal>
+    <figure class="gallery-fig large">
+      <img src="https://math-mandir.vercel.app/images/darshan.jpg" alt="Darshan of Sri Sri Guru Gauranga Radha Madhava Ji" loading="lazy" referrerpolicy="no-referrer">
+      <figcaption>The Sacred Altar · Darshan</figcaption>
+    </figure>
+    <figure class="gallery-fig">
+      <img src="https://math-mandir.vercel.app/images/about-hero.jpg" alt="Sacred grounds of the Math" loading="lazy" referrerpolicy="no-referrer">
+      <figcaption>Temple Grounds</figcaption>
+    </figure>
+    <figure class="gallery-fig">
+      <img src="https://math-mandir.vercel.app/images/hero-bg.jpg" alt="Sri Chaitanya Gaudiya Math, Chandigarh" loading="lazy" referrerpolicy="no-referrer">
+      <figcaption>Sri Chaitanya Gaudiya Math</figcaption>
+    </figure>
+    <figure class="gallery-fig large">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnfyEGwg7LjHPtU2flbDL8e_IR0EBnVeyVnHYAYldmz9M_h4gJs0k2Ss1JJyyrfaVZr48w-FYTMrRNX3FLOGP4IP26i6GodOg3XcrnsKeb1YlUL1YV6r7Sg9wJ1uAApM-fP4f7jlanKQlPU1XIDRiD9cJGdjd6ZHkoY2kalkGJ_5oFNpLCvnYzZyXyuEQevTJvMwvkZn4e14eTIEJrdUUbQ8Dx6RgtQ51uVHM8n_N6COqgV-sAD9sDSP07YCudZRqctC2FU1rmfmQ" alt="Community gathering and kirtan" loading="lazy" referrerpolicy="no-referrer">
+      <figcaption>Community Gathering · Kirtan</figcaption>
+    </figure>
+    <figure class="gallery-fig">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaLgg1P5mEQhZE-KpMKLroQj3c74ZTi8zsWMa4VZ2idysLtG-nXc5hGbuBt9yA7FvjnjHE9yvH5XR36bmHX05IhF3ZN4U7iwWNP-wMmWydVgBEqOZvN45XyHP95GWvVLMClEEKBUkwQQ3wtRkuRnXgZa-xgePua3oaPAwcrUvk68Y0YqKL5N1YPwveuxzqF_Nyh6VBgUEhJ7Z0xaiv5JV1rdtaxNZ2OWj86hoXS8TISPasvrq3pGLfGE7v-rp7FL5XkHH87tJ41UnlzQ" alt="The deities and the altar" loading="lazy" referrerpolicy="no-referrer">
+      <figcaption>The Deities</figcaption>
+    </figure>
+  </div>
+</div>
+
+<!-- QUOTE BANNER -->
+<figure class="quote-banner" data-reveal>
+  <blockquote>"The chanting of Hare Krishna is the sublime method for reviving our transcendental consciousness."</blockquote>
+  <figcaption>Sri Chaitanya Mahaprabhu</figcaption>
+</figure>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <span>© 2024 Sri Chaitanya Gaudiya Math, Chandigarh. All Rights Reserved.</span>
+    <span class="footer-bottom-hi">हरे कृष्ण · जय श्री राधा माधव</span>
+  </div>
+</footer>
+
+<script>
+  // Ticks
+  const g = document.getElementById('nav-ticks');
+  for (let i = 0; i < 12; i++) {
+    const a = i * 30 * Math.PI / 180;
+    const ln = document.createElementNS('http://www.w3.org/2000/svg','line');
+    ln.setAttribute('x1', (20+13*Math.cos(a)).toFixed(1)); ln.setAttribute('y1', (20+13*Math.sin(a)).toFixed(1));
+    ln.setAttribute('x2', (20+17*Math.cos(a)).toFixed(1)); ln.setAttribute('y2', (20+17*Math.sin(a)).toFixed(1));
+    g.appendChild(ln);
+  }
+  // Scrolled nav
+  const nav = document.getElementById('site-nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+  // Reveal
+  const io = new IntersectionObserver(ents => ents.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { threshold: 0.1 });
+  document.querySelectorAll('[data-reveal]').forEach(e => io.observe(e));
+  // Broken images
+  document.querySelectorAll('img').forEach(img => img.addEventListener('error', () => img.style.opacity = 0));
+</script>
+</body>
+</html>
