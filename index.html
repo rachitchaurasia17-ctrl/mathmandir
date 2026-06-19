@@ -290,43 +290,117 @@
     .daily-num { font-family: 'Marcellus',serif; font-size: 14px; color: #cdb896; }
     .daily-divider { border-top: 1px solid rgba(150,116,40,0.2); }
 
-    /* ─── EVENTS ─── */
     #events {
-      position: relative; background: #f4e9d5;
-      padding: clamp(72px,11vh,140px) clamp(22px,5vw,80px);
+      position: relative;
+      padding: clamp(72px,11vh,140px) 0;
+      overflow: hidden;
     }
-    .events-inner { max-width: 1140px; margin: 0 auto; }
+    /* video background */
+    .events-video-bg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; z-index: 0;
+      filter: brightness(0.25) saturate(1.3);
+    }
+    /* warm overlay gradient over video */
+    .events-video-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(135deg,
+        rgba(46,36,23,0.78) 0%,
+        rgba(90,50,10,0.55) 50%,
+        rgba(46,36,23,0.78) 100%);
+    }
+    .events-inner {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 clamp(22px,5vw,80px);
+    }
     .events-header {
       display: flex; flex-wrap: wrap; justify-content: space-between;
-      align-items: flex-end; gap: 24px; margin-bottom: 48px;
+      align-items: flex-end; gap: 24px; margin-bottom: 56px;
     }
+    .events-header .section-label { color: rgba(255,200,100,0.8); }
+    .events-header .section-h2 { color: #fff7e8; }
     .events-header-link {
       font-family: 'Marcellus',serif; font-size: 13px; letter-spacing: .08em;
-      color: #8a5a22; text-decoration: none;
-      border-bottom: 1px solid var(--accent); padding-bottom: 3px;
+      color: rgba(255,200,100,0.9); text-decoration: none;
+      border-bottom: 1px solid rgba(255,200,100,0.5); padding-bottom: 3px;
+      transition: color .3s, border-color .3s;
     }
+    .events-header-link:hover { color: #fff; border-color: #fff; }
+    /* festival cards grid */
     .events-grid {
-      display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 1px; background: rgba(150,116,40,0.18);
-      border: 1px solid rgba(150,116,40,0.18);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
     }
-    .event-card { background: #faf4e6; padding: 30px 28px 34px; transition: background .4s; }
-    .event-card:hover { background: #fffdf8; }
+    .event-card {
+      position: relative; overflow: hidden;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,220,120,0.2);
+      backdrop-filter: blur(8px);
+      border-radius: 12px;
+      padding: 34px 28px 38px;
+      transition: background .4s, transform .4s, box-shadow .4s;
+      cursor: default;
+    }
+    .event-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .5s ease;
+    }
+    .event-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.35); }
+    .event-card:hover::before { transform: scaleX(1); }
+    .event-icon {
+      font-size: 32px; margin-bottom: 20px; display: block;
+      filter: drop-shadow(0 2px 6px rgba(217,119,46,0.5));
+    }
     .event-card-month {
-      margin: 0; font-family: 'Marcellus',serif; font-size: 11.5px;
-      letter-spacing: .18em; text-transform: uppercase; color: var(--accent);
+      margin: 0; font-family: 'Marcellus',serif; font-size: 10.5px;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: rgba(255,200,100,0.8);
     }
-    .event-card-name { margin: 14px 0 0; font-family: 'Marcellus',serif; font-weight: 400; font-size: 24px; line-height: 1.15; color: #2e2417; }
-    .event-card-hi { margin: 12px 0 0; font-family: 'Tiro Devanagari Hindi',serif; font-size: 14px; color: #a8946f; }
-    .event-card-desc { margin: 14px 0 0; font-size: 15px; line-height: 1.7; font-weight: 300; color: #6b5d45; }
+    .event-card-name {
+      margin: 12px 0 0; font-family: 'Marcellus',serif; font-weight: 400;
+      font-size: clamp(20px,2vw,26px); line-height: 1.15; color: #fff7e8;
+    }
+    .event-card-hi {
+      margin: 10px 0 0; font-family: 'Tiro Devanagari Hindi',serif;
+      font-size: 15px; color: rgba(255,220,120,0.7);
+    }
+    .event-card-desc {
+      margin: 14px 0 0; font-size: 14.5px; line-height: 1.75;
+      font-weight: 300; color: rgba(255,247,232,0.78);
+    }
+    /* special highlight card */
     .event-card-special {
-      background: var(--accent); padding: 30px 28px 34px;
-      display: flex; flex-direction: column; justify-content: center;
+      background: linear-gradient(135deg, rgba(217,119,46,0.85), rgba(183,138,50,0.85));
+      border-color: rgba(255,255,255,0.2);
+      display: flex; flex-direction: column;
     }
+    .event-card-special::before { background: linear-gradient(90deg,#fff,rgba(255,255,255,0.5)); }
     .event-card-special .event-card-month { color: rgba(255,255,255,0.85); }
-    .event-card-special .event-card-name { color: #fff; }
-    .event-card-special .event-card-desc { color: rgba(255,255,255,0.92); }
-    .events-note { margin: 22px 0 0; font-size: 13.5px; font-weight: 300; font-style: italic; color: #8a7c63; }
+    .event-card-special .event-card-name { color: #fff; font-size: clamp(22px,2.2vw,28px); }
+    .event-card-special .event-card-desc { color: rgba(255,255,255,0.9); }
+    /* pulsing quote below */
+    .events-quote-bar {
+      margin-top: 56px; text-align: center;
+      padding: 40px; border: 1px solid rgba(255,220,120,0.15);
+      border-radius: 8px; background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+    }
+    .events-quote-bar blockquote {
+      margin: 0; font-family: 'Spectral',serif; font-style: italic;
+      font-weight: 300; font-size: clamp(17px,1.8vw,22px);
+      line-height: 1.65; color: rgba(255,247,232,0.88);
+    }
+    .events-quote-bar figcaption {
+      margin-top: 16px; font-family: 'Marcellus',serif;
+      font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(255,200,100,0.7);
+    }
+    .events-note { margin: 24px 0 0; font-size: 13px; font-weight: 300; font-style: italic; color: rgba(255,247,232,0.5); }
 
     /* ─── PARAMPARA ─── */
     #parampara {
@@ -689,18 +763,28 @@
 
 <!-- ============ 03 · EVENTS ============ -->
 <section id="events">
+  <!-- video background -->
+  <video class="events-video-bg" autoplay muted loop playsinline preload="none"
+         src="d8562000ae05e3d1ba0e2ea0e23bdaae.mp4"
+         aria-hidden="true"></video>
+  <div class="events-video-overlay"></div>
+
   <div class="events-inner">
     <div class="events-header" data-reveal>
       <div style="max-width:620px">
         <p class="section-label">03 — Sacred Calendar</p>
-        <h2 class="section-h2">Festivals &amp; observances<br>through the year</h2>
+        <h2 class="section-h2">Festivals &amp; Observances<br>through the year</h2>
       </div>
       <a href="https://drive.google.com/file/d/1UXDkEpu5Elma1FzoRUCAYJ8rzeSp6gs_/view"
          target="_blank" rel="noreferrer"
          class="events-header-link" id="panchang-link">View the Panchang →</a>
     </div>
     <div class="events-grid" data-reveal id="events-grid"><!-- populated by JS --></div>
-    <p class="events-note" data-reveal>Dates follow the Vaishnava lunar calendar and vary each year — please refer to the Panchang or contact the Math for the current schedule.</p>
+    <figure class="events-quote-bar" data-reveal>
+      <blockquote>"In this age of Kali, the congregational chanting of the holy name is the only means of deliverance."</blockquote>
+      <figcaption>Sri Chaitanya Mahaprabhu</figcaption>
+    </figure>
+    <p class="events-note" data-reveal>Dates follow the Vaishnava lunar calendar — refer to the Panchang or contact the Math for this year's schedule.</p>
   </div>
 </section>
 
@@ -944,9 +1028,11 @@ buildTicks(document.getElementById('footer-ticks'));
 
 /* ── Events grid ── */
 (function() {
+  const ICONS = ['🌕','🙏','🪷','🪔','✨'];
   const el = document.getElementById('events-grid');
-  const cards = EVENTS.map(e => `
+  const cards = EVENTS.map((e, i) => `
     <div class="event-card">
+      <span class="event-icon">${ICONS[i] || '✨'}</span>
       <p class="event-card-month">${e.month}</p>
       <h3 class="event-card-name">${e.name}</h3>
       <p class="event-card-hi">${e.hi}</p>
@@ -954,8 +1040,9 @@ buildTicks(document.getElementById('footer-ticks'));
     </div>
   `).join('');
   const special = `
-    <div class="event-card-special">
-      <p class="event-card-month">Every Week</p>
+    <div class="event-card event-card-special">
+      <span class="event-icon">🎶</span>
+      <p class="event-card-month">Every Week · Sunday</p>
       <h3 class="event-card-name">Sunday Satsang &amp; Prasadam</h3>
       <p class="event-card-desc">Katha, kirtan and a sanctified vegetarian feast. Bring your family — all are welcome at the Math.</p>
     </div>
