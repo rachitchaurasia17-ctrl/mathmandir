@@ -259,36 +259,219 @@
       padding: 9px 16px; border-radius: 24px;
     }
 
-    /* ─── DAILY LIFE ─── */
+    /* ─── DAILY LIFE — AWARD-WINNING REDESIGN ─── */
     #daily {
-      position: relative; background: #fbf5ea;
-      padding: clamp(72px,11vh,140px) clamp(22px,5vw,80px);
+      position: relative;
+      background: linear-gradient(175deg, #1a120a 0%, #2e1e10 35%, #3a1f0a 60%, #4a2810 100%);
+      padding: clamp(90px,14vh,180px) clamp(22px,5vw,80px);
+      overflow: hidden;
     }
-    .daily-inner { max-width: 1140px; margin: 0 auto; }
-    .daily-intro { max-width: 680px; margin-bottom: 54px; }
-    .daily-intro-body { margin: 22px 0 0; font-size: 17px; line-height: 1.8; font-weight: 300; color: #5c4f3a; }
-    .daily-row {
-      display: grid;
-      grid-template-columns: minmax(120px,200px) minmax(0,1fr) auto;
-      gap: clamp(16px,3vw,48px); align-items: baseline;
-      padding: 26px 0; border-top: 1px solid rgba(150,116,40,0.2);
+    #daily::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(217,119,46,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 85% 85%, rgba(183,138,50,0.08) 0%, transparent 50%);
+      pointer-events: none;
     }
-    .daily-when {
-      font-family: 'Marcellus',serif; font-size: 13px;
-      letter-spacing: .16em; text-transform: uppercase; color: var(--accent);
+    /* subtle floating particles */
+    #daily::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 15% 25%, rgba(255,220,150,0.25), transparent),
+        radial-gradient(1px 1px at 45% 60%, rgba(255,220,150,0.2), transparent),
+        radial-gradient(1.5px 1.5px at 70% 15%, rgba(255,220,150,0.15), transparent),
+        radial-gradient(1px 1px at 85% 70%, rgba(255,220,150,0.2), transparent),
+        radial-gradient(1px 1px at 30% 85%, rgba(255,220,150,0.15), transparent);
+      animation: floatParticles 20s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes floatParticles {
+      0% { transform: translateY(0) translateX(0); }
+      100% { transform: translateY(-15px) translateX(8px); }
+    }
+
+    .daily-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+
+    .daily-intro { max-width: 700px; margin-bottom: 72px; }
+    .daily-intro .section-label { color: rgba(217,119,46,0.9); }
+    .daily-intro .section-h2 { color: #fff7e8; }
+    .daily-intro-body {
+      margin: 24px 0 0; font-size: 18px; line-height: 1.85;
+      font-weight: 300; color: rgba(255,247,232,0.65);
+    }
+
+    /* ─ Timeline spine ─ */
+    .daily-timeline {
+      position: relative;
+      padding-left: 56px;
+    }
+    .daily-timeline::before {
+      content: '';
+      position: absolute; left: 22px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom,
+        rgba(217,119,46,0.6) 0%,
+        rgba(183,138,50,0.4) 50%,
+        rgba(183,138,50,0.15) 100%);
+    }
+
+    /* ─ Each card ─ */
+    .daily-card {
+      position: relative;
+      background: rgba(255,253,248,0.04);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,247,232,0.08);
+      border-radius: 20px;
+      padding: 38px 42px;
+      margin-bottom: 24px;
+      transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      cursor: default;
+    }
+    .daily-card:last-child { margin-bottom: 0; }
+
+    .daily-card::before {
+      content: '';
+      position: absolute; inset: -1px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(217,119,46,0.3), transparent 40%, transparent 60%, rgba(183,138,50,0.2));
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: -1;
+      padding: 1px;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+    .daily-card:hover {
+      background: rgba(255,253,248,0.07);
+      transform: translateX(8px) scale(1.01);
+      border-color: rgba(217,119,46,0.25);
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.3),
+        0 0 40px rgba(217,119,46,0.06),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .daily-card:hover::before { opacity: 1; }
+
+    /* ─ Timeline dot ─ */
+    .daily-dot {
+      position: absolute;
+      left: -44px; top: 44px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid #1a120a;
+      box-shadow: 0 0 0 3px rgba(217,119,46,0.3), 0 0 16px rgba(217,119,46,0.2);
+      transition: all 0.4s ease;
+      z-index: 2;
+    }
+    .daily-card:hover .daily-dot {
+      box-shadow: 0 0 0 5px rgba(217,119,46,0.4), 0 0 28px rgba(217,119,46,0.4);
+      transform: scale(1.3);
+    }
+
+    /* ─ Card header ─ */
+    .daily-card-header {
+      display: flex; align-items: center; gap: 20px;
+      margin-bottom: 18px;
+    }
+    .daily-card-icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 52px; height: 52px; flex-shrink: 0;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(217,119,46,0.15), rgba(183,138,50,0.08));
+      border: 1px solid rgba(217,119,46,0.2);
+      font-size: 24px;
+      box-shadow: 0 4px 16px rgba(217,119,46,0.1);
+      transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .daily-card:hover .daily-card-icon {
+      transform: scale(1.12) rotate(-4deg);
+      box-shadow: 0 8px 24px rgba(217,119,46,0.25);
+      border-color: rgba(217,119,46,0.5);
+    }
+    .daily-card-num {
+      font-family: 'Marcellus',serif;
+      font-size: 48px; line-height: 1;
+      background: linear-gradient(135deg, rgba(217,119,46,0.25), rgba(183,138,50,0.1));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+      margin-left: auto;
+      transition: all 0.4s ease;
+    }
+    .daily-card:hover .daily-card-num {
+      background: linear-gradient(135deg, rgba(217,119,46,0.5), rgba(183,138,50,0.3));
+      -webkit-background-clip: text; background-clip: text;
+    }
+
+    /* ─ Card meta ─ */
+    .daily-card-meta {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 6px;
+    }
+    .daily-card-when {
+      font-family: 'Marcellus',serif; font-size: 11px;
+      letter-spacing: .25em; text-transform: uppercase;
+      color: var(--accent);
       margin: 0;
     }
-    .daily-when-hi {
-      margin: 5px 0 0; font-family: 'Tiro Devanagari Hindi',serif;
-      font-size: 14px; color: #a8946f;
+    .daily-card-when-hi {
+      font-family: 'Tiro Devanagari Hindi',serif;
+      font-size: 14px; color: rgba(183,138,50,0.65);
+      margin: 0;
     }
-    .daily-name {
-      margin: 0; font-family: 'Marcellus',serif; font-weight: 400;
-      font-size: clamp(20px,2.4vw,27px); color: #2e2417;
+    .daily-card-separator {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: rgba(217,119,46,0.4);
     }
-    .daily-desc { margin: 9px 0 0; font-size: 15.5px; line-height: 1.7; font-weight: 300; color: #6b5d45; max-width: 54ch; }
-    .daily-num { font-family: 'Marcellus',serif; font-size: 14px; color: #cdb896; }
-    .daily-divider { border-top: 1px solid rgba(150,116,40,0.2); }
+    .daily-card-name {
+      margin: 8px 0 0;
+      font-family: 'Marcellus',serif; font-weight: 400;
+      font-size: clamp(22px,2.6vw,30px); line-height: 1.2;
+      color: #fff7e8;
+    }
+    .daily-card-desc {
+      margin: 14px 0 0; font-size: 16px; line-height: 1.85;
+      font-weight: 300; color: rgba(255,247,232,0.55);
+      max-width: 58ch;
+      transition: color 0.4s ease;
+    }
+    .daily-card:hover .daily-card-desc { color: rgba(255,247,232,0.75); }
+
+    /* ─ Stagger animation ─ */
+    .daily-card { opacity: 0; transform: translateY(40px) translateX(-10px); }
+    .daily-card.seen {
+      opacity: 1; transform: translateY(0) translateX(0);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+                  transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .daily-card:nth-child(1) { transition-delay: 0ms; }
+    .daily-card:nth-child(2) { transition-delay: 100ms; }
+    .daily-card:nth-child(3) { transition-delay: 200ms; }
+    .daily-card:nth-child(4) { transition-delay: 300ms; }
+    .daily-card:nth-child(5) { transition-delay: 400ms; }
+    .daily-card:nth-child(6) { transition-delay: 500ms; }
+
+    /* ─ Bottom glow accent ─ */
+    .daily-glow {
+      position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+      .daily-timeline { padding-left: 40px; }
+      .daily-timeline::before { left: 14px; }
+      .daily-dot { left: -34px; }
+      .daily-card { padding: 28px 24px; }
+      .daily-card-num { font-size: 36px; }
+    }
 
     /* ─── EVENTS ─── */
     #events {
@@ -737,9 +920,9 @@
       <h2 class="section-h2">The rhythm of devotion,<br>from dawn to dusk</h2>
       <p class="daily-intro-body">Each day at the Math unfolds as an offering — worship, scripture, and song flowing one into the next. All programs are open; you are warmly invited to simply arrive.</p>
     </div>
-    <div data-reveal id="daily-list"><!-- populated by JS --></div>
-    <div class="daily-divider"></div>
+    <div class="daily-timeline" id="daily-list"><!-- populated by JS --></div>
   </div>
+  <div class="daily-glow"></div>
 </section>
 
 <!-- ============ 03 · EVENTS ============ -->
@@ -873,12 +1056,12 @@
 <script>
 /* ── Data ── */
 const DAILY = [
-  { when:'Before Dawn', hi:'मंगल आरती',     name:'Mangala Arati',                   num:'01', desc:'The day awakens with lamps and kirtan offered to the Lord in the deep stillness before sunrise.' },
-  { when:'Morning',     hi:'तुलसी पूजा',    name:'Darshan & Tulsi Worship',         num:'02', desc:'Sri Sri Guru Gauranga Radha Madhava receive worship as devotees honour sacred Tulsi Devi.' },
-  { when:'Morning',     hi:'श्रीमद् भागवतम्', name:'Srimad Bhagavatam Discourse',  num:'03', desc:'Daily reading and explanation of the scripture — timeless wisdom for living a devotional life.' },
-  { when:'Through the Day', hi:'हरिनाम संकीर्तन', name:'Harinam Sankirtan',        num:'04', desc:'The congregational chanting of the holy name — the very heart of the Gaudiya tradition.' },
-  { when:'At Dusk',    hi:'संध्या आरती',    name:'Sandhya Arati',                   num:'05', desc:'As lamps are lit at twilight, the temple gathers once more in song, prayer and gratitude.' },
-  { when:'Every Sunday', hi:'सत्संग',       name:'Sunday Satsang & Prasadam',       num:'06', desc:'A fuller gathering of katha, kirtan and a sanctified vegetarian feast — all are warmly welcome.' },
+  { when:'Before Dawn', hi:'मंगल आरती',     name:'Mangala Arati',                   num:'01', icon:'🕯️', desc:'The day awakens with lamps and kirtan offered to the Lord in the deep stillness before sunrise.' },
+  { when:'Morning',     hi:'तुलसी पूजा',    name:'Darshan & Tulsi Worship',         num:'02', icon:'🌿', desc:'Sri Sri Guru Gauranga Radha Madhava receive worship as devotees honour sacred Tulsi Devi.' },
+  { when:'Morning',     hi:'श्रीमद् भागवतम्', name:'Srimad Bhagavatam Discourse',  num:'03', icon:'📖', desc:'Daily reading and explanation of the scripture — timeless wisdom for living a devotional life.' },
+  { when:'Through the Day', hi:'हरिनाम संकीर्तन', name:'Harinam Sankirtan',        num:'04', icon:'🎶', desc:'The congregational chanting of the holy name — the very heart of the Gaudiya tradition.' },
+  { when:'At Dusk',    hi:'संध्या आरती',    name:'Sandhya Arati',                   num:'05', icon:'🪔', desc:'As lamps are lit at twilight, the temple gathers once more in song, prayer and gratitude.' },
+  { when:'Every Sunday', hi:'सत्संग',       name:'Sunday Satsang & Prasadam',       num:'06', icon:'🙏', desc:'A fuller gathering of katha, kirtan and a sanctified vegetarian feast — all are warmly welcome.' },
 ];
 
 const EVENTS = [
@@ -947,18 +1130,31 @@ buildTicks(document.getElementById('footer-ticks'));
 (function() {
   const el = document.getElementById('daily-list');
   el.innerHTML = DAILY.map(d => `
-    <div class="daily-row">
-      <div>
-        <p class="daily-when">${d.when}</p>
-        <p class="daily-when-hi">${d.hi}</p>
+    <div class="daily-card">
+      <div class="daily-dot"></div>
+      <div class="daily-card-header">
+        <div class="daily-card-icon">${d.icon}</div>
+        <div style="flex:1;min-width:0;">
+          <div class="daily-card-meta">
+            <p class="daily-card-when">${d.when}</p>
+            <span class="daily-card-separator"></span>
+            <p class="daily-card-when-hi">${d.hi}</p>
+          </div>
+        </div>
+        <span class="daily-card-num">${d.num}</span>
       </div>
-      <div>
-        <h3 class="daily-name">${d.name}</h3>
-        <p class="daily-desc">${d.desc}</p>
-      </div>
-      <span class="daily-num">${d.num}</span>
+      <h3 class="daily-card-name">${d.name}</h3>
+      <p class="daily-card-desc">${d.desc}</p>
     </div>
   `).join('');
+
+  // Stagger reveal for daily cards
+  const dailyIO = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add('seen'); dailyIO.unobserve(en.target); }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -5% 0px' });
+  el.querySelectorAll('.daily-card').forEach(card => dailyIO.observe(card));
 })();
 
 /* ── Events grid ── */
