@@ -795,11 +795,261 @@
       #resources, #visit, footer {
         padding-left: 22px !important; padding-right: 22px !important;
       }
+    /* ─── PRELOADER ─── */
+    #preloader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: linear-gradient(145deg, #1a120a, #2e1e10, #3a1f0a);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                  filter 0.8s ease;
+      will-change: opacity, transform;
+    }
+    #preloader.done {
+      opacity: 0;
+      transform: scale(1.08);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    /* Sacred mandala container */
+    .pre-mandala {
+      position: relative;
+      width: 200px; height: 200px;
+      margin-bottom: 48px;
+    }
+
+    /* Outer rotating ring */
+    .pre-ring {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      border: 1.5px solid transparent;
+    }
+    .pre-ring-1 {
+      border-color: rgba(217,119,46,0.2);
+      border-top-color: rgba(217,119,46,0.8);
+      border-right-color: rgba(183,138,50,0.5);
+      animation: preRingSpin 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .pre-ring-2 {
+      inset: 18px;
+      border-color: rgba(183,138,50,0.15);
+      border-bottom-color: rgba(183,138,50,0.7);
+      border-left-color: rgba(217,119,46,0.4);
+      animation: preRingSpin 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite reverse;
+    }
+    .pre-ring-3 {
+      inset: 38px;
+      border-color: rgba(217,119,46,0.1);
+      border-top-color: rgba(217,119,46,0.6);
+      animation: preRingSpin 1.8s linear infinite;
+    }
+
+    @keyframes preRingSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Decorative tick marks around outer ring */
+    .pre-ticks {
+      position: absolute; inset: -6px;
+      animation: preRingSpin 20s linear infinite;
+    }
+
+    /* Center lotus glow */
+    .pre-lotus {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px; height: 64px;
+    }
+    .pre-lotus-core {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(217,119,46,0.9) 0%, rgba(217,119,46,0.3) 50%, transparent 70%);
+      animation: preLotusBreath 2s ease-in-out infinite;
+    }
+    .pre-lotus-inner {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 30px rgba(217,119,46,0.6), 0 0 60px rgba(217,119,46,0.3);
+      animation: preLotusBreath 2s ease-in-out infinite 0.3s;
+    }
+    /* Petal shapes via box-shadows */
+    .pre-lotus-petals {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 8px; height: 8px;
+      transform: translate(-50%, -50%);
+    }
+    .pre-lotus-petals span {
+      position: absolute;
+      width: 6px; height: 20px;
+      background: rgba(217,119,46,0.35);
+      border-radius: 50%;
+      left: 50%; top: 50%;
+      transform-origin: center center;
+      animation: prePetalPulse 2.5s ease-in-out infinite;
+    }
+    .pre-lotus-petals span:nth-child(1) { transform: translate(-50%,-50%) rotate(0deg) translateY(-22px); animation-delay: 0s; }
+    .pre-lotus-petals span:nth-child(2) { transform: translate(-50%,-50%) rotate(45deg) translateY(-22px); animation-delay: 0.15s; }
+    .pre-lotus-petals span:nth-child(3) { transform: translate(-50%,-50%) rotate(90deg) translateY(-22px); animation-delay: 0.3s; }
+    .pre-lotus-petals span:nth-child(4) { transform: translate(-50%,-50%) rotate(135deg) translateY(-22px); animation-delay: 0.45s; }
+    .pre-lotus-petals span:nth-child(5) { transform: translate(-50%,-50%) rotate(180deg) translateY(-22px); animation-delay: 0.6s; }
+    .pre-lotus-petals span:nth-child(6) { transform: translate(-50%,-50%) rotate(225deg) translateY(-22px); animation-delay: 0.75s; }
+    .pre-lotus-petals span:nth-child(7) { transform: translate(-50%,-50%) rotate(270deg) translateY(-22px); animation-delay: 0.9s; }
+    .pre-lotus-petals span:nth-child(8) { transform: translate(-50%,-50%) rotate(315deg) translateY(-22px); animation-delay: 1.05s; }
+
+    @keyframes preLotusBreath {
+      0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.8; }
+      50% { transform: translate(-50%,-50%) scale(1.15); opacity: 1; }
+    }
+    @keyframes prePetalPulse {
+      0%, 100% { opacity: 0.3; height: 20px; }
+      50% { opacity: 0.7; height: 24px; }
+    }
+
+    /* Text elements */
+    .pre-text {
+      text-align: center;
+      opacity: 0;
+      animation: preTextIn 1s ease-out 0.5s forwards;
+    }
+    .pre-name {
+      font-family: 'Marcellus', serif;
+      font-size: clamp(20px, 3vw, 30px);
+      font-weight: 400;
+      color: #fff7e8;
+      letter-spacing: 0.12em;
+      margin: 0;
+    }
+    .pre-location {
+      margin: 10px 0 0;
+      font-family: 'Marcellus', serif;
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .pre-hindi {
+      margin: 28px 0 0;
+      font-family: 'Tiro Devanagari Hindi', serif;
+      font-size: 16px;
+      color: rgba(255,247,232,0.4);
+      opacity: 0;
+      animation: preTextIn 1s ease-out 1s forwards;
+    }
+
+    /* Progress bar */
+    .pre-progress {
+      position: absolute;
+      bottom: 60px;
+      left: 50%; transform: translateX(-50%);
+      width: min(240px, 60vw);
+      height: 1px;
+      background: rgba(255,247,232,0.1);
+      border-radius: 1px;
+      overflow: hidden;
+    }
+    .pre-progress-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      border-radius: 1px;
+      animation: preProgress 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .pre-progress-label {
+      position: absolute;
+      bottom: 36px;
+      left: 50%; transform: translateX(-50%);
+      font-family: 'Marcellus', serif;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,247,232,0.25);
+      white-space: nowrap;
+    }
+
+    @keyframes preTextIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes preProgress {
+      0% { width: 0; }
+      30% { width: 45%; }
+      60% { width: 70%; }
+      100% { width: 100%; }
+    }
+
+    /* Ambient particles in preloader */
+    .pre-particles {
+      position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+    }
+    .pre-particle {
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: rgba(217,119,46,0.3);
+      animation: preParticleFloat linear infinite;
+    }
+    @keyframes preParticleFloat {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
       .why-fig-badge { right: 0; }
     }
   </style>
 </head>
 <body>
+
+<!-- ============ PRELOADER ============ -->
+<div id="preloader" aria-label="Loading">
+  <div class="pre-particles" id="pre-particles"></div>
+  <div class="pre-mandala">
+    <!-- Decorative SVG ticks -->
+    <svg class="pre-ticks" viewBox="0 0 200 200" fill="none">
+      <g stroke="rgba(183,138,50,0.25)" stroke-width="1">
+        <line x1="100" y1="2" x2="100" y2="10"></line>
+        <line x1="100" y1="190" x2="100" y2="198"></line>
+        <line x1="2" y1="100" x2="10" y2="100"></line>
+        <line x1="190" y1="100" x2="198" y2="100"></line>
+        <line x1="30.3" y1="30.3" x2="35.9" y2="35.9"></line>
+        <line x1="164.1" y1="164.1" x2="169.7" y2="169.7"></line>
+        <line x1="30.3" y1="169.7" x2="35.9" y2="164.1"></line>
+        <line x1="164.1" y1="35.9" x2="169.7" y2="30.3"></line>
+      </g>
+    </svg>
+    <!-- Spinning rings -->
+    <div class="pre-ring pre-ring-1"></div>
+    <div class="pre-ring pre-ring-2"></div>
+    <div class="pre-ring pre-ring-3"></div>
+    <!-- Center lotus -->
+    <div class="pre-lotus">
+      <div class="pre-lotus-core"></div>
+      <div class="pre-lotus-petals">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <div class="pre-lotus-inner"></div>
+    </div>
+  </div>
+  <div class="pre-text">
+    <p class="pre-name">Sri Chaitanya Gaudiya Math</p>
+    <p class="pre-location">Sector 20 · Chandigarh</p>
+  </div>
+  <p class="pre-hindi">हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे</p>
+  <div class="pre-progress">
+    <div class="pre-progress-bar"></div>
+  </div>
+  <span class="pre-progress-label">Entering the Sanctuary</span>
+</div>
 
 <!-- ============ NAV ============ -->
 <nav id="site-nav" role="navigation" aria-label="Main navigation">
@@ -1290,6 +1540,42 @@ initReveal();
 document.querySelectorAll('img').forEach(img => {
   img.addEventListener('error', () => { img.style.opacity = 0; });
 });
+/* ── Preloader particles + dismiss ── */
+(function() {
+  // Generate floating particles
+  const pc = document.getElementById('pre-particles');
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'pre-particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (4 + Math.random() * 6) + 's';
+    p.style.animationDelay = (Math.random() * 3) + 's';
+    p.style.width = p.style.height = (1 + Math.random() * 2.5) + 'px';
+    pc.appendChild(p);
+  }
+
+  // Dismiss preloader
+  function dismissPreloader() {
+    const pre = document.getElementById('preloader');
+    if (!pre || pre.classList.contains('done')) return;
+    pre.classList.add('done');
+    setTimeout(() => {
+      pre.style.display = 'none';
+    }, 900);
+  }
+
+  // Dismiss when page fully loaded, minimum 2.4s display
+  const minTime = 2400;
+  const start = Date.now();
+  window.addEventListener('load', () => {
+    const elapsed = Date.now() - start;
+    const remaining = Math.max(0, minTime - elapsed);
+    setTimeout(dismissPreloader, remaining);
+  });
+
+  // Fallback: dismiss after 5s no matter what
+  setTimeout(dismissPreloader, 5000);
+})();
 </script>
 </body>
 </html>
