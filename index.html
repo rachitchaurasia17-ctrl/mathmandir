@@ -310,64 +310,121 @@
     .events-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      gap: 28px;
     }
     .event-card {
-      display: block; text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; text-decoration: none; color: inherit;
       position: relative; overflow: hidden;
-      background: #faf4e6;
-      border: 1px solid rgba(150,116,40,0.18);
-      border-radius: 12px;
-      padding: 34px 28px 38px;
-      transition: background .4s, transform .4s, box-shadow .4s;
+      background: linear-gradient(145deg, #fffdf8, #f4ead3);
+      border: 1px solid rgba(183, 138, 50, 0.2);
+      border-radius: 16px;
+      padding: 40px 32px;
+      box-shadow: 0 10px 30px rgba(120, 80, 20, 0.05);
+      transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
       cursor: pointer;
+      z-index: 1;
     }
     .event-card::before {
       content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--gold));
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--gold), var(--accent));
+      background-size: 200% 100%;
       transform: scaleX(0); transform-origin: left;
-      transition: transform .5s ease;
+      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      z-index: 2;
     }
-    .event-card:hover { background: #fffdf8; transform: translateY(-6px); box-shadow: 0 20px 50px rgba(120,80,20,0.15); }
-    .event-card:hover::before { transform: scaleX(1); }
+    .event-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.9), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: -1;
+    }
+    .event-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 24px 50px rgba(150, 100, 30, 0.15);
+      border-color: rgba(183, 138, 50, 0.4);
+    }
+    .event-card:hover::before { transform: scaleX(1); animation: shimmerBar 3s linear infinite; }
+    .event-card:hover::after { opacity: 1; }
+    
+    @keyframes shimmerBar {
+      0% { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
+
     .event-icon {
-      font-size: 32px; margin-bottom: 20px; display: block;
-      filter: drop-shadow(0 2px 6px rgba(217,119,46,0.3));
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 58px; height: 58px;
+      font-size: 28px; margin-bottom: 24px;
+      background: linear-gradient(135deg, rgba(217, 119, 46, 0.1), rgba(183, 138, 50, 0.05));
+      border: 1px solid rgba(217, 119, 46, 0.2);
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(217, 119, 46, 0.08);
+      transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
     }
+    .event-card:hover .event-icon {
+      transform: scale(1.15) rotate(6deg);
+      box-shadow: 0 10px 24px rgba(217, 119, 46, 0.2);
+    }
+
     .event-card-month {
-      margin: 0; font-family: 'Marcellus',serif; font-size: 10.5px;
-      letter-spacing: .22em; text-transform: uppercase; color: var(--accent);
+      margin: 0; font-family: 'Marcellus',serif; font-size: 11px;
+      letter-spacing: .25em; text-transform: uppercase; color: var(--accent);
     }
     .event-card-name {
-      margin: 12px 0 0; font-family: 'Marcellus',serif; font-weight: 400;
-      font-size: clamp(20px,2vw,26px); line-height: 1.15; color: #2e2417;
+      margin: 14px 0 0; font-family: 'Marcellus',serif; font-weight: 400;
+      font-size: clamp(22px,2vw,28px); line-height: 1.25; color: #2e2417;
     }
     .event-card-hi {
-      margin: 10px 0 0; font-family: 'Tiro Devanagari Hindi',serif;
-      font-size: 15px; color: #a8946f;
+      margin: 8px 0 0; font-family: 'Tiro Devanagari Hindi',serif;
+      font-size: 16px; color: #a8946f;
     }
     .event-card-desc {
-      margin: 14px 0 0; font-size: 14.5px; line-height: 1.75;
+      margin: 16px 0 0; font-size: 15px; line-height: 1.8;
       font-weight: 300; color: #6b5d45;
+      flex-grow: 1;
     }
     .event-card-cta {
-      display: inline-block; margin-top: 18px;
-      font-family: 'Marcellus',serif; font-size: 11px; letter-spacing: .12em;
+      display: inline-block; margin-top: 26px;
+      font-family: 'Marcellus',serif; font-size: 11.5px; letter-spacing: .15em;
       text-transform: uppercase; color: var(--accent);
-      border-bottom: 1px solid var(--accent); padding-bottom: 2px;
+      border-bottom: 1px solid rgba(217, 119, 46, 0.4); padding-bottom: 4px;
+      align-self: flex-start; transition: all 0.3s ease;
     }
+    .event-card:hover .event-card-cta {
+      border-color: var(--accent);
+      letter-spacing: .18em;
+    }
+
     /* special highlight card */
     .event-card-special {
-      background: var(--accent); border-color: var(--accent);
+      background: linear-gradient(135deg, var(--accent), #b25816);
+      border-color: transparent;
+      box-shadow: 0 14px 35px rgba(217, 119, 46, 0.25);
     }
-    .event-card-special:hover { background: #c06a22; }
+    .event-card-special::before { background: rgba(255, 255, 255, 0.8); }
+    .event-card-special::after {
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.2), transparent 70%);
+    }
+    .event-card-special:hover {
+      background: linear-gradient(135deg, #e38239, #a34e10);
+      box-shadow: 0 24px 50px rgba(217, 119, 46, 0.4);
+    }
+    .event-card-special .event-icon {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
     .event-card-special .event-card-month { color: rgba(255,255,255,0.85); }
     .event-card-special .event-card-name { color: #fff; }
     .event-card-special .event-card-hi { color: rgba(255,255,255,0.7); }
-    .event-card-special .event-card-desc { color: rgba(255,255,255,0.92); }
-    .event-card-special .event-card-cta { color: #fff; border-color: rgba(255,255,255,0.6); }
-    .events-note { margin: 22px 0 0; font-size: 13.5px; font-weight: 300; font-style: italic; color: #8a7c63; }
+    .event-card-special .event-card-desc { color: rgba(255,255,255,0.95); }
+    .event-card-special .event-card-cta { color: #fff; border-color: rgba(255, 255, 255, 0.4); }
+    .event-card-special:hover .event-card-cta { border-color: rgba(255, 255, 255, 0.9); }
+    
+    .events-note { margin: 26px 0 0; font-size: 14px; font-weight: 300; font-style: italic; color: #8a7c63; text-align: center; }
 
     /* ─── PARAMPARA ─── */
     #parampara {
