@@ -436,46 +436,6 @@
       border-bottom: 1px solid var(--accent); padding-bottom: 3px;
     }
 
-    /* ─── GALLERY ─── */
-    #gallery {
-      position: relative; background: #fbf5ea;
-      padding: clamp(72px,11vh,140px) clamp(22px,5vw,80px);
-    }
-    .gallery-inner { max-width: 1240px; margin: 0 auto; }
-    .gallery-intro { max-width: 640px; margin-bottom: 48px; }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(6,1fr);
-      grid-auto-rows: minmax(140px,auto);
-      gap: clamp(10px,1.4vw,18px);
-    }
-    .gallery-fig {
-      margin: 0; position: relative; border-radius: 6px;
-      overflow: hidden; background: #efe2c6;
-      box-shadow: 0 16px 40px rgba(120,80,20,0.12);
-    }
-    .gallery-fig img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 1s ease;
-    }
-    .gallery-fig:hover img { transform: scale(1.05); }
-    .gallery-fig figcaption {
-      position: absolute; left: 18px; bottom: 14px;
-      font-family: 'Marcellus',serif; font-size: 12px;
-      letter-spacing: .12em; text-transform: uppercase;
-      color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.5);
-    }
-    .gallery-fig-1 { grid-column: span 4; grid-row: span 2; }
-    .gallery-fig-2 { grid-column: span 2; grid-row: span 1; }
-    .gallery-fig-3 { grid-column: span 2; grid-row: span 1; }
-    .gallery-fig-4 { grid-column: span 3; grid-row: span 1; }
-    .gallery-fig-5 { grid-column: span 3; grid-row: span 1; }
-    .gallery-more { margin: 22px 0 0; font-size: 13.5px; font-weight: 300; color: #8a7c63; }
-    .gallery-more a {
-      color: #8a5a22; text-decoration: none;
-      border-bottom: 1px solid var(--accent); padding-bottom: 2px;
-    }
-
     /* ─── RESOURCES ─── */
     #resources {
       position: relative; background: #f6e8ca; color: #4a3d29;
@@ -592,13 +552,10 @@
       .nav-links { display: none; }
       .hero-h1   { font-size: 48px !important; }
       #site-nav, #top, #why, #daily, #events, #parampara,
-      #gallery, #resources, #visit, footer {
+      #resources, #visit, footer {
         padding-left: 22px !important; padding-right: 22px !important;
       }
       .why-fig-badge { right: 0; }
-      .gallery-fig-1 { grid-column: span 6; }
-      .gallery-fig-2, .gallery-fig-3 { grid-column: span 3; }
-      .gallery-fig-4, .gallery-fig-5 { grid-column: span 6; }
     }
   </style>
 </head>
@@ -757,42 +714,6 @@
     <div class="parampara-more" data-reveal>
       <a href="https://math-mandir.vercel.app/acharyas.html" target="_blank" rel="noreferrer" id="acharyas-link">Explore the full lineage of Acharyas →</a>
     </div>
-  </div>
-</section>
-
-<!-- ============ 05 · GALLERY ============ -->
-<section id="gallery">
-  <div class="gallery-inner">
-    <div class="gallery-intro" data-reveal>
-      <p class="section-label">05 — Temple Gallery</p>
-      <h2 class="section-h2">Moments from the Math</h2>
-    </div>
-    <div class="gallery-grid" data-reveal>
-      <figure class="gallery-fig gallery-fig-1">
-        <img src="https://math-mandir.vercel.app/images/darshan.jpg"
-             alt="Darshan of the deities" referrerpolicy="no-referrer" loading="lazy">
-        <figcaption>The Sacred Altar</figcaption>
-      </figure>
-      <figure class="gallery-fig gallery-fig-2">
-        <img src="https://math-mandir.vercel.app/images/about-hero.jpg"
-             alt="Sacred architecture of the Math" referrerpolicy="no-referrer" loading="lazy">
-      </figure>
-      <figure class="gallery-fig gallery-fig-3">
-        <img src="https://math-mandir.vercel.app/images/hero-bg.jpg"
-             alt="Temple grounds" referrerpolicy="no-referrer" loading="lazy">
-      </figure>
-      <figure class="gallery-fig gallery-fig-4">
-        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnfyEGwg7LjHPtU2flbDL8e_IR0EBnVeyVnHYAYldmz9M_h4gJs0k2Ss1JJyyrfaVZr48w-FYTMrRNX3FLOGP4IP26i6GodOg3XcrnsKeb1YlUL1YV6r7Sg9wJ1uAApM-fP4f7jlanKQlPU1XIDRiD9cJGdjd6ZHkoY2kalkGJ_5oFNpLCvnYzZyXyuEQevTJvMwvkZn4e14eTIEJrdUUbQ8Dx6RgtQ51uVHM8n_N6COqgV-sAD9sDSP07YCudZRqctC2FU1rmfmQ"
-             alt="Community gathering" referrerpolicy="no-referrer" loading="lazy">
-      </figure>
-      <figure class="gallery-fig gallery-fig-5">
-        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaLgg1P5mEQhZE-KpMKLroQj3c74ZTi8zsWMa4VZ2idysLtG-nXc5hGbuBt9yA7FvjnjHE9yvH5XR36bmHX05IhF3ZN4U7iwWNP-wMmWydVgBEqOZvN45XyHP95GWvVLMClEEKBUkwQQ3wtRkuRnXgZa-xgePua3oaPAwcrUvk68Y0YqKL5N1YPwveuxzqF_Nyh6VBgUEhJ7Z0xaiv5JV1rdtaxNZ2OWj86hoXS8TISPasvrq3pGLfGE7v-rp7FL5XkHH87tJ41UnlzQ"
-             alt="The deities and altar" referrerpolicy="no-referrer" loading="lazy">
-      </figure>
-    </div>
-    <p class="gallery-more" data-reveal>
-      <a href="https://math-mandir.vercel.app/harinam.html" target="_blank" rel="noreferrer" id="harinam-link">See all Harinam &amp; festival photographs →</a>
-    </p>
   </div>
 </section>
 
